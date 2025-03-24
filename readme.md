@@ -1,6 +1,6 @@
 # BDD-harjoitus Robot Frameworkilla
 
-Tässä harjoituksessa harjoittelet end-to-end (E2E) -testien kirjoittamista käyttäen [**Robot Frameworkia**](https://robotframework.org/) ja [**Browser-kirjastoa**](https://robotframework-browser.org/). Tavoitteena on automatisoida keskeisiä käyttäjäpolkuja [SauceDemo](https://www.saucedemo.com/)-verkkosivustolla, joka on yleisesti käytetty testiympäristö web-automaatiolle.
+Tässä harjoituksessa harjoittelet end-to-end (E2E) -testien kirjoittamista käyttäen [**Robot Frameworkia**](https://robotframework.org/) ja [**Browser-kirjastoa**](https://robotframework-browser.org/). Tavoitteena on automatisoida keskeisiä käyttäjäpolkuja [SauceDemo](https://www.saucedemo.com/)-verkkosivustolla, joka on yleisesti käytetty harjoitteluympäristö web-automaatiolle.
 
 Testit on tässä harjoituksessa tarkoitus kirjoittaa noudattaen **behavior-driven development (BDD)** -periaatteita:
 
@@ -11,14 +11,19 @@ Testit on tässä harjoituksessa tarkoitus kirjoittaa noudattaen **behavior-driv
 
 ## Asennukset
 
-Robot Framework perustuu Pythoniin ja sen käyttäminen edellyttää Pythonin sekä pip-paketinhallintajärjestelmän asennusta. Lisäksi tarvitset  **Browser**-kirjaston, joka mahdollistaa web-selainten hyödyntämisen testeissä Robot Frameworkilla. Browser-kirjasto käyttää taustalla Playwright-työkalua, joka puolestaan on toteutettu Node.js:llä, joten tarvitset myös Node.js:n asennettuna.
+Robot Framework perustuu Pythoniin ja sen käyttäminen edellyttää Pythonin sekä pip-paketinhallintajärjestelmän asennusta. Lisäksi tarvitset [**Browser**-kirjaston](https://robotframework-browser.org/), joka mahdollistaa web-selainten hyödyntämisen testeissä Robot Frameworkilla. Browser-kirjasto käyttää taustalla [**Playwright**-testaustyökalua](https://playwright.dev), joka puolestaan on toteutettu Node.js:llä, joten tarvitset myös Node.js:n asennettuna.
+
+* https://www.python.org/downloads/
+* https://nodejs.org/en/download
+
+Suosittelemme sekä Pythonista että Node.js:stä viimeisintä LTS-versiota (Long-Term Support).
 
 
 ### 1. Asenna Robot Framework
 
 Robot Frameworkin kotisivulta löytyy [pika-asennusohje](https://robotframework.org/?tab=1#getting-started), jonka avulla saat sen asennettua itsellesi. Laajempi, [erillinen asennusohje](https://github.com/robotframework/robotframework/blob/master/INSTALL.rst), esittelee tarkemmin eri vaihtoehtoja.
 
-Pikaohjeen mukaan asennat Robot Frameworkin pipillä:
+Pikaohjeen mukaan voit asentaa Robot Frameworkin PIP-paketinhallintajärjestelmällä:
 
 ```sh
 # Install Robot Framework with pip:
@@ -27,6 +32,8 @@ pip install robotframework
 # Verify the installation:
 robot --version
 ```
+
+👆 Komennossa käytetty pip-pakettienhallinta asentuu oletuksena Pythonin mukana. Asennettavan `robotframework`-paketin tarkemmat tiedot löytyvät pypi.org-sivustolta https://pypi.org/project/robotframework/.
 
 
 ### 2. Asenna tarvittavat paketit
@@ -37,6 +44,15 @@ Tutustu [Robot Frameworkin Browser -kirjaston ohjeisiin](https://robotframework-
 # Install Browser library from PyPi with pip:
 pip install robotframework-browser
 
+# Verify the installation:
+rfbrowser --version
+```
+
+`robotframework-browser`-paketin tarkemmat tiedot löytyvät osoitteesta https://pypi.org/project/robotframework-browser/.
+
+Seuraavaksi tarvitset Playwright-työkalun sekä siihen kuuluvat testiselaimet. Voit asentaa ne käyttämällä juuri asennettua `rfbrowser`-komentoa.
+
+```
 # Initialize the Browser library (installs all browsers):
 rfbrowser init
 ```
@@ -48,7 +64,7 @@ Jos haluat käyttää vain tiettyä selainta, voit valita sen asentamalla vain s
 rfbrowser init chromium
 ```
 
-Kurssin lopuksi, kun et enää tarvitse selaimia, voit vapauttaa tilaa ja poistaa testiselaimet komennolla:
+Harjoituksen tai kurssin lopuksi, kun et enää tarvitse selaimia, voit vapauttaa tilaa ja poistaa testiselaimet komennolla:
 
 ``` sh
 # Clean old browser binaries and node dependencies:
@@ -62,18 +78,18 @@ rfbrowser clean-node
 
 ## Testien suorittaminen
 
-Kun olet saanut Robot Frameworkin ja robotframework-browser-kirjaston asennettua, voit kokeilla suorittaa ensimmäisiä testejä. Tässä repositoriossa on valmiiksi määritelty testitiedosto [`tests/example.robot`](./tests/example.robot), joka sisältää yksinkertaisen testin. Suorita kyseinen testitiedosto komennolla:
+Kun olet saanut Robot Frameworkin ja Browser-kirjaston asennettua, voit kokeilla suorittaa ensimmäisiä testejä. Tässä repositoriossa on valmiiksi määritelty testitiedosto [`tests/example.robot`](./tests/example.robot), joka sisältää yksinkertaisen testin. Voit suorittaa kyseinen testitiedosto komennolla:
 
 ```sh
 robot tests/example.robot
 ```
 
-Testin pitäisi mennä läpi onnistuneesti ja tulostaa testitulokset konsoliin. Lisäksi Robot Framework luo HTML-raportin, jonka voit avata selaimella.
+Testin pitäisi mennä läpi onnistuneesti ja tulostaa testitulokset konsoliin. Lisäksi Robot Framework luo HTML-raportin, jonka voit avata selaimella. Raportin tarkasteleminen on erityisen hyödyllistä, mikäli testit epäonnistuvat, sillä raportti sisältää yksityiskohtaisia tietoja ja kuvankaappauksia testitapauksista ja niiden epäonnistumisista.
 
 
 ## Behavior Driven Development (BDD)
 
-BDD-syntaksista kerrotaan Robot Frameworkin dokumentaatiossa kappaleessa [BDD (Behavior Driven Development)](https://docs.robotframework.org/docs/testcase_styles/bdd).
+Behavior Driven Development (BDD) on ohjelmistokehityksen menetelmä, joka korostaa ohjelmiston käyttäytymisen kuvaamista ja testaamista. BDD:ssä testitapaukset kirjoitetaan luonnollisella kielellä ja ne kuvaavat ohjelman toimintaa käyttäjän näkökulmasta. Robot Framework tukee BDD-testausta ja sen avulla testitapaukset voidaan kirjoittaa käyttäen luonnollista kieltä.
 
 BDD-testit kirjoitetaan käyttäen **Given-When-Then** -rakennetta, joka kuvaa testattavan skenaarion tilanteen, toiminnan ja odotetun lopputuloksen. Esimerkiksi seuraava testi kuvaa käyttäjän kirjautumista verkkosivustolle:
 
@@ -118,12 +134,14 @@ Edellä oleva esimerkki löytyy tehtäväreposta tiedostosta [`tests/bdd_example
 robot tests/bdd_example.robot
 ```
 
+BDD-syntaksista kerrotaan Robot Frameworkin dokumentaatiossa kappaleessa [BDD (Behavior Driven Development)](https://docs.robotframework.org/docs/testcase_styles/bdd).
+
 
 ## Omat testit
 
-[SauceDemo](https://www.saucedemo.com/) on testauskäyttöön tarkoitettu verkkokauppa, jossa käyttäjät voivat kirjautua sisään, selata tuotteita, lisätä niitä ostoskoriin ja suorittaa ostotapahtuman. Sivusto sisältää erilaisia testattavia skenaarioita, kuten erilaisia käyttäjärooleja, kuten lukittu käyttäjätili, sekä tuotteiden lajittelutoimintoja.
+**SauceDemo** (https://www.saucedemo.com/) on testauskäyttöön tarkoitettu verkkokauppa, jossa käyttäjät voivat kirjautua sisään, selata tuotteita, lisätä niitä ostoskoriin ja suorittaa ostotapahtuman. Sivusto sisältää erilaisia testattavia skenaarioita, kuten erilaisia käyttäjärooleja, kuten lukittu käyttäjätili, sekä tuotteiden lajittelutoimintoja.
 
-Tavoitteena on automatisoida keskeisiä käyttäjäpolkuja SauceDemo-verkkosivustolla. Valitse testattavat skenaariot alla olevasta listasta ja kirjoita niihin testit Robot Frameworkilla. Voit myös keksiä lisäksi omia skenaarioita, jos haluat.
+Tässä harjoituksessa tavoitteena on automatisoida keskeisiä käyttäjäpolkuja SauceDemo-verkkosivustolla. Valitse testattavat skenaariot alla olevasta listasta ja kirjoita niihin testit Robot Frameworkilla. Voit myös keksiä lisäksi omia skenaarioita, jos haluat.
 
 Jaa testisi eri tiedostoihin parhaaksi katsoamallasi tavalla hyödyntäen [Robot Frameworkin Project Structure -ohjetta](https://docs.robotframework.org/docs/examples/project_structure). Voit myös määritellä yhteisiä avainsanoja, jotka voivat olla käytössä useissa testitapauksissa. Tällaiset avainsanat voidaan määritellä omassa tiedostossaan ja tuoda muihin testitiedostoihin `Resource`-avainsanalla.
 
@@ -221,6 +239,13 @@ Jaa testisi eri tiedostoihin parhaaksi katsoamallasi tavalla hyödyntäen [Robot
 ## Tehtävän automaattinen arviointi
 
 Kun olet kirjoittanut testitapaukset ja varmistanut, että ne toimivat odotetusti, voit palauttaa tehtävän tarkastusta varten. Lisää luomasi testitiedostot versionhallintaan ja lähetä muutokset GitHubiin `git status`, `git add`, `git commit` ja `git push` -komennoilla.
+
+
+## Lisenssit
+
+[Sauce Labs Sample Application](https://www.saucedemo.com/) on julkaistu [MIT-lisenssillä](https://github.com/saucelabs/sample-app-web/blob/main/LICENSE).
+
+Robot Framework on lisensoitu [Apache 2.0 -lisenssillä](https://github.com/robotframework/robotframework/blob/master/LICENSE.txt) ja Browser-kirjasto on lisensoitu [Apache 2.0 -lisenssillä](https://github.com/MarketSquare/robotframework-browser/blob/main/LICENSE).
 
 
 ## Materiaalista
