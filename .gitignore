@@ -1,0 +1,9 @@
+# Robot Framework output
+log.html
+output.xml
+report.html
+playwright-log.txt
+results/
+
+# VS Code
+.vscode/
