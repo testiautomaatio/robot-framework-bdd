@@ -236,7 +236,7 @@ Jaa testisi eri tiedostoihin parhaaksi katsoamallasi tavalla hyödyntäen [Robot
 > **Then** a confirmation message should be displayed
 
 
-## Tehtävän automaattinen arviointi
+## Tehtävän palauttaminen
 
 Kun olet kirjoittanut testitapaukset ja varmistanut, että ne toimivat odotetusti, voit palauttaa tehtävän tarkastusta varten. Lisää luomasi testitiedostot versionhallintaan ja lähetä muutokset GitHubiin `git status`, `git add`, `git commit` ja `git push` -komennoilla.
 
