@@ -124,7 +124,9 @@ The user should be redirected to the products page
     Get Url      should end with      inventory.html
 ```
 
-Yllä esiintyvät *"The user..."*-alkuiset avainsanat ovat oman testitapauksen vaiheita vastaavat avainsanat. Voit ajatella niitä ikään kuin funktioina, joiden sisällä on yksi tai useampi Robot Frameworkin kirjaston avainsana. Robot Frameworkin syntaksissa avainsanat erotetaan testeistä kolmen tähden rivillä `*** Keywords ***`. Kunkin avainsanan operaatiot kirjoitetaan omille riveilleen ja ne suoritetaan testitapauksen vaiheiden mukaisessa järjestyksessä. Robot Framework perustuu Pythoniin ja noudattaa Pythonin tavoin sisennyksiä koodilohkojen erottamiseksi. Yksittäiset operaatiot koostuvat eri osista, kuten avainsanasta ja sen argumenteista, jotka erotetaan toisistaan käyttämällä useita välilyöntejä.
+Yllä esiintyvät *"The user..."*-alkuiset avainsanat ovat oman testitapauksen vaiheita vastaavat avainsanat. Voit ajatella niitä ikään kuin funktioina, joiden sisällä on yksi tai useampi Robot Frameworkin kirjaston avainsana. Robot Frameworkin syntaksissa avainsanat erotetaan testeistä kolmen tähden rivillä `*** Keywords ***`. Kunkin avainsanan operaatiot kirjoitetaan omille riveilleen ja ne suoritetaan testitapauksen vaiheiden mukaisessa järjestyksessä.
+
+Robot Framework noudattaa Pythonin tavoin sisennyksiä koodilohkojen erottamiseksi. Yksittäiset operaatiot koostuvat eri osista, kuten avainsanasta ja sen argumenteista, jotka erotetaan toisistaan käyttämällä useita välilyöntejä.
 
 Yllä olevassa esimerkissä avainsanat `New Page`, `Type Text`, `Click` ja `Get Url` ovat [Browser-kirjaston avainsanoja](https://marketsquare.github.io/robotframework-browser/Browser.html), joiden avulla voidaan ohjata web-selainta ja tarkastaa sivuston tilaa. Kaikki Browser-kirjaston avainsanat on dokumentoitu sen omilla sivuilla: https://marketsquare.github.io/robotframework-browser/Browser.html.
 
