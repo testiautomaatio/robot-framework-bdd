@@ -1,5 +1,5 @@
 *** Settings ***
-Library             Browser    auto_delete_passed_tracing=False
+Library             Browser
 
 # The following lines are required for automatic assessment of the exercise.
 # Tracing means that the browser will record each step of the test.
