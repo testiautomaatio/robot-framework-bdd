@@ -128,7 +128,7 @@ jobs:
       with:
         test-name: Completing a purchase
         setup-command: ''
-        command: "./.github/find_trace.sh 'checkout-complete.html"
+        command: "./.github/find_trace.sh 'checkout-complete.html'"
         timeout: 1
         max-score: 10
 
