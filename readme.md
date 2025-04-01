@@ -52,9 +52,9 @@ rfbrowser --version
 
 `robotframework-browser`-paketin tarkemmat tiedot löytyvät osoitteesta https://pypi.org/project/robotframework-browser/.
 
-Seuraavaksi tarvitset Playwright-työkalun sekä siihen kuuluvat testiselaimet. Voit asentaa ne käyttämällä juuri asennettua `rfbrowser`-komentoa.
+Seuraavaksi tarvitset Playwright-työkalun sekä siihen kuuluvat testiselaimet. Ne asennetaan Browser-kirjaston avulla käyttäen `rfbrowser`-komentoa:
 
-```
+```sh
 # Initialize the Browser library (installs all browsers):
 rfbrowser init
 ```
@@ -158,11 +158,11 @@ Jotta trace-tiedostot tallentuvat oikein, jokaisen testitapauksen alussa tulee o
 Helpoiten saat uuden kontekstin luotua jokaisen testin alussa ja suljettua jokaisen testin lopussa lisäämällä seuraavat rivit jokaisen robot-tiedoston alkuun `*** Settings ***`-lohkoon:
 
 ```robot
-Suite Setup         New Context    tracing=True
-Suite Teardown      Close Context
+Test Setup          New Context    tracing=True
+Test Teardown       Close Context
 ```
 
-Trace-tiedostot tallentuvat [browser/traces](./browser/traces/)-hakemistoon zip-tiedostoina, joita voit tarkastella [Playwrightin Trace viewer -työkalulla](https://playwright.dev/docs/trace-viewer). Työkalua voidaan käyttää paikallisesti asennettuna tai kätevästi osoitteessa https://trace.playwright.dev/. Katso tästä Playwrightin oma esimerkki [trace-tiedostosta](https://trace.playwright.dev/?trace=https://demo.playwright.dev/reports/todomvc/data/fa874b0d59cdedec675521c21124e93161d66533.zip) sekä [esimerkkiin liittyvä video](https://youtu.be/yP6AnTxC34s).
+Trace-tiedostot tallentuvat projektiisi zip-tiedostoina, joita voit tarkastella [Playwrightin Trace viewer -työkalulla](https://playwright.dev/docs/trace-viewer). Työkalua voidaan käyttää paikallisesti asennettuna tai kätevästi osoitteessa https://trace.playwright.dev/. Katso tästä Playwrightin oma esimerkki [trace-tiedostosta](https://trace.playwright.dev/?trace=https://demo.playwright.dev/reports/todomvc/data/fa874b0d59cdedec675521c21124e93161d66533.zip) sekä [esimerkkiin liittyvä video](https://youtu.be/yP6AnTxC34s).
 
 
 ## Testattavat skenaariot
