@@ -7,3 +7,6 @@ results/
 
 # VS Code
 .vscode/
+
+# Browser library temp files
+/browser/

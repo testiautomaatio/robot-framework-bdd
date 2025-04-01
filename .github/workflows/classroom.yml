@@ -1,0 +1,157 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    env:
+      CI: true
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Install Robot Framework
+      run: pip install robotframework
+      timeout-minutes: 2
+    - name: Install Browser library
+      run: pip install robotframework-browser
+      timeout-minutes: 2
+    - name: Install Chromium browser
+      run: rfbrowser init chromium
+      timeout-minutes: 2
+    - name: Run tests
+      run: robot --outputdir=results/ tests/
+      timeout-minutes: 5
+      continue-on-error: true
+
+    - name: Extract traces
+      run: "./.github/extract_traces.sh"
+
+    - name: Successful login with a valid user
+      id: login-1
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Successful login with a valid user
+        setup-command: ''
+        command: "./.github/find_trace.sh inventory.html"
+        timeout: 1
+        max-score: 10
+
+    - name: Login with an invalid user
+      id: login-2
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Login with an invalid user
+        setup-command: ''
+        command: "./.github/find_trace.sh 'Username and password do not match any user in this service'"
+        timeout: 1
+        max-score: 10
+
+    - name: Login with a locked-out user
+      id: login-3
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Login with a locked-out user
+        setup-command: ''
+        command: "./.github/find_trace.sh 'Sorry, this user has been locked out'"
+        timeout: 1
+        max-score: 10
+
+    - name: Product list is displayed after login
+      id: products-1
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Product list is displayed after login
+        setup-command: ''
+        command: "./.github/find_trace.sh 'Sauce Labs Backpack'"
+        timeout: 1
+        max-score: 10
+
+    - name: Product list is displayed after login
+      id: products-1
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Product list is displayed after login
+        setup-command: ''
+        command: "./.github/find_trace.sh 'Sauce Labs Backpack'"
+        timeout: 1
+        max-score: 10
+
+    - name: Product list is displayed after login
+      id: products-1
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Product list is displayed after login
+        setup-command: ''
+        command: "./.github/find_trace.sh 'Price (low to high)'"
+        timeout: 1
+        max-score: 10
+
+    - name: Adding an item to the cart
+      id: cart-1
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Adding an item to the cart
+        setup-command: ''
+        command: "./.github/find_trace.sh 'Continue shopping'"
+        timeout: 1
+        max-score: 10
+
+    - name: Removing an item from the cart
+      id: cart-2
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Removing an item from the cart
+        setup-command: ''
+        command: "./.github/find_trace.sh 'Remove'"
+        timeout: 1
+        max-score: 10
+
+    - name: Proceeding to checkout
+      id: cart-3
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Proceeding to checkout
+        setup-command: ''
+        command: "./.github/find_trace.sh 'checkout-step-one.html'"
+        timeout: 1
+        max-score: 10
+
+    - name: Completing a purchase
+      id: completing-1
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Completing a purchase
+        setup-command: ''
+        command: "./.github/find_trace.sh 'checkout-step-two.html'"
+        timeout: 1
+        max-score: 10
+
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        LOGIN-1_RESULTS: "${{steps.login-1.outputs.result}}"
+        LOGIN-2_RESULTS: "${{steps.login-2.outputs.result}}"
+        LOGIN-3_RESULTS: "${{steps.login-3.outputs.result}}"
+        PRODUCTS-1_RESULTS: "${{steps.products-1.outputs.result}}"
+        PRODUCTS-1_RESULTS: "${{steps.products-1.outputs.result}}"
+        PRODUCTS-1_RESULTS: "${{steps.products-1.outputs.result}}"
+        CART-1_RESULTS: "${{steps.cart-1.outputs.result}}"
+        CART-2_RESULTS: "${{steps.cart-2.outputs.result}}"
+        CART-3_RESULTS: "${{steps.cart-3.outputs.result}}"
+        COMPLETING-1_RESULTS: "${{steps.completing-1.outputs.result}}"
+
+      with:
+        runners: login-1,login-2,login-3,products-1,products-1,products-1,cart-1,cart-2,cart-3,completing-1
+
+    - uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() }}
+      with:
+        name: results
+        path: results
+        retention-days: 30

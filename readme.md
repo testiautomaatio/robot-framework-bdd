@@ -38,7 +38,9 @@ robot --version
 
 ### 2. Asenna tarvittavat paketit
 
-Tutustu [Robot Frameworkin Browser -kirjaston ohjeisiin](https://robotframework-browser.org/#installation) ja asenna se. Pika-asennusohjeen mukaan asennus onnistuu seuraavasti:
+Robot Framework sisältää perustoiminnot, joiden avulla voidaan suorittaa testejä, mutta se ei sisällä valmiita kirjastoja web-selainten ohjaamiseen. Tämän vuoksi tarvitset erillisen kirjaston, kuten [Browser-kirjaston](https://robotframework-browser.org/), joka mahdollistaa web-selainten käytön Robot Frameworkin kanssa. Browser-kirjasto käyttää taustalla [Playwright](https://playwright.dev)-työkalua, joka on Node.js:llä toteutettu työkalu web-selainten automatisointiin.
+
+Tutustu [Browser-kirjaston ohjeisiin](https://robotframework-browser.org/#installation) ja asenna se. Pika-asennusohjeen mukaan asennus onnistuu pip-työkalulla seuraavasti:
 
 ```sh
 # Install Browser library from PyPi with pip:
@@ -73,7 +75,7 @@ rfbrowser clean-node
 
 ### 3. VS Code -laajennoksen asennus
 
-[Robot Frameworkin ohjeissa](https://docs.robotframework.org/docs/getting_started/ide) suositellaan VS Codea sekä [Robot Code](https://marketplace.visualstudio.com/items?itemName=d-biehl.robotcode) -nimistä laajennosta testien kirjoittamiseksi ja suorittamiseksi VS Codessa. Suosittelemme perehtymään laajennokseen ja oman harkinnan mukaan asentamaan sen.
+[Robot Frameworkin ohjeissa](https://docs.robotframework.org/docs/getting_started/ide) suositellaan VS Codea sekä [Robot Code](https://marketplace.visualstudio.com/items?itemName=d-biehl.robotcode) -nimistä laajennosta testien kirjoittamiseksi ja suorittamiseksi VS Codessa. Suosittelemme perehtymään laajennokseen ja oman harkinnan mukaan asentamaan myös sen.
 
 
 ## Testien suorittaminen
@@ -84,7 +86,7 @@ Kun olet saanut Robot Frameworkin ja Browser-kirjaston asennettua, voit kokeilla
 robot tests/example.robot
 ```
 
-Testin pitäisi mennä läpi onnistuneesti ja tulostaa testitulokset konsoliin. Lisäksi Robot Framework luo HTML-raportin, jonka voit avata selaimella. Raportin tarkasteleminen on erityisen hyödyllistä, mikäli testit epäonnistuvat, sillä raportti sisältää yksityiskohtaisia tietoja ja kuvankaappauksia testitapauksista ja niiden epäonnistumisista.
+Testin pitäisi mennä läpi onnistuneesti ja tulostaa testitulokset konsoliin. Lisäksi Robot Framework luo HTML-raportin, jonka voit avata selaimella. Raportin tarkasteleminen on erityisen hyödyllistä, mikäli testit epäonnistuvat, sillä raportti sisältää yksityiskohtaisia tietoja testitapauksista ja testien epäonnistuessä myös kuvankaappauksia.
 
 
 ## Behavior Driven Development (BDD)
@@ -143,9 +145,31 @@ BDD-syntaksista kerrotaan Robot Frameworkin dokumentaatiossa kappaleessa [BDD (B
 
 **SauceDemo** (https://www.saucedemo.com/) on testauskäyttöön tarkoitettu verkkokauppa, jossa käyttäjät voivat kirjautua sisään, selata tuotteita, lisätä niitä ostoskoriin ja suorittaa ostotapahtuman. Sivusto sisältää erilaisia testattavia skenaarioita, kuten erilaisia käyttäjärooleja, kuten lukittu käyttäjätili, sekä tuotteiden lajittelutoimintoja.
 
-Tässä harjoituksessa tavoitteena on automatisoida keskeisiä käyttäjäpolkuja SauceDemo-verkkosivustolla. Valitse testattavat skenaariot alla olevasta listasta ja kirjoita niihin testit Robot Frameworkilla. Voit myös keksiä lisäksi omia skenaarioita, jos haluat.
+Tässä harjoituksessa tavoitteena on automatisoida keskeisiä käyttäjäpolkuja [SauceDemo-verkkosivustolla](https://www.saucedemo.com/). Testattavat skenaariot  löytyvät olevasta listasta. Voit myös keksiä lisäksi omia skenaarioita, jos haluat.
 
-Jaa testisi eri tiedostoihin parhaaksi katsoamallasi tavalla hyödyntäen [Robot Frameworkin Project Structure -ohjetta](https://docs.robotframework.org/docs/examples/project_structure). Voit myös määritellä yhteisiä avainsanoja, jotka voivat olla käytössä useissa testitapauksissa. Tällaiset avainsanat voidaan määritellä omassa tiedostossaan ja tuoda muihin testitiedostoihin `Resource`-avainsanalla.
+Jaa testisi eri tiedostoihin [tests](./tests/)-hakemiston alle parhaaksi katsoamallasi tavalla hyödyntäen [Robot Frameworkin Project Structure -ohjetta](https://docs.robotframework.org/docs/examples/project_structure). Voit myös määritellä yhteisiä avainsanoja, jotka voivat olla käytössä useissa testitapauksissa. Tällaiset avainsanat voidaan määritellä omassa tiedostossaan ja tuoda muihin testitiedostoihin [`Resource`-avainsanalla](https://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#resource-and-variable-files).
+
+### Tracing
+
+**Automaattisen arvioinnin** vuoksi testitapausten tulee tallentaa selaimen tapahtumat ns. "trace"-tiedostoon, jonka avulla tehtävän automaattinen arviointi varmistaa, että vaaditut tapaukset on käyty läpi.
+
+Jotta trace-tiedostot tallentuvat oikein, jokaisen testitapauksen alussa tulee olla komento `New Context    tracing=True`. Komento avaa uuden "kontekstin", joiden avulla eri testit ovat toisistaan eristyksissä ja joiden avulla testejä voidaan suorittaa samassa selaimessa rinnakkain niiden häiritsemättä toisiaan. Voit lukea aiheesta lisää [Browser-kirjaston dokumentaatiosta](https://marketsquare.github.io/robotframework-browser/Browser.html#Browser%2C%20Context%20and%20Page).
+
+Helpoiten saat uuden kontekstin luotua jokaisen testin alussa ja suljettua jokaisen testin lopussa lisäämällä seuraavat rivit jokaisen robot-tiedoston alkuun `*** Settings ***`-lohkoon:
+
+```robot
+Suite Setup         New Context    tracing=True
+Suite Teardown      Close Context
+```
+
+Trace-tiedostot tallentuvat [browser/traces](./browser/traces/)-hakemistoon zip-tiedostoina, joita voit tarkastella [Playwrightin Trace viewer -työkalulla](https://playwright.dev/docs/trace-viewer). Työkalua voidaan käyttää paikallisesti asennettuna tai kätevästi osoitteessa https://trace.playwright.dev/. Katso tästä Playwrightin oma esimerkki [trace-tiedostosta](https://trace.playwright.dev/?trace=https://demo.playwright.dev/reports/todomvc/data/fa874b0d59cdedec675521c21124e93161d66533.zip) sekä [esimerkkiin liittyvä video](https://youtu.be/yP6AnTxC34s).
+
+
+## Testattavat skenaariot
+
+Alla on luettelo testattavista skenaarioista, jotka sinun tulee toteuttaa. Voit jakaa testisi useisiin tiedostoihin.
+
+Testitapauksissa tarvitaan käyttäjätunnuksia, jotka löydät https://www.saucedemo.com/ -sivuston etusivulta kirjautumisen yhteydessä. Huomaa, että tarvitset eri testeissä eri tunnuksia riippuen siitä, mitä ominaisuutta olet testaamassa (esim. lukittu tunnus). Tuotteiden listauksen ja ostamiseen liittyvissä testeissä ei tarvitse käyttää bugisia tunnuksia, vaan `standard_user`-tunnus riittää niihin hyvin.
 
 
 ### Kirjautuminen
@@ -242,12 +266,16 @@ Jaa testisi eri tiedostoihin parhaaksi katsoamallasi tavalla hyödyntäen [Robot
 
 Kun olet kirjoittanut testitapaukset ja varmistanut, että ne toimivat odotetusti, voit palauttaa tehtävän tarkastusta varten. Lisää luomasi testitiedostot versionhallintaan ja lähetä muutokset GitHubiin `git status`, `git add`, `git commit` ja `git push` -komennoilla.
 
+Mikäli et saa oikeaa määrää pisteitä automaattisesta arvioinnista, tarkasta, että olet huomioinut ylempänä ohjeistetun "trace"-tiedostojen luomisen.
+
 
 ## Lisenssit
 
 [Sauce Labs Sample Application](https://www.saucedemo.com/) on julkaistu [MIT-lisenssillä](https://github.com/saucelabs/sample-app-web/blob/main/LICENSE).
 
-Robot Framework on lisensoitu [Apache 2.0 -lisenssillä](https://github.com/robotframework/robotframework/blob/master/LICENSE.txt) ja Browser-kirjasto on lisensoitu [Apache 2.0 -lisenssillä](https://github.com/MarketSquare/robotframework-browser/blob/main/LICENSE).
+Robot Framework on lisensoitu [Apache 2.0 -lisenssillä](https://github.com/robotframework/robotframework/blob/master/LICENSE.txt).
+
+Browser-kirjasto on lisensoitu [Apache 2.0 -lisenssillä](https://github.com/MarketSquare/robotframework-browser/blob/main/LICENSE).
 
 
 ## Materiaalista
