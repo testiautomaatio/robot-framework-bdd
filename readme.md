@@ -208,16 +208,16 @@ Testitapauksissa tarvitaan käyttäjätunnuksia, jotka löydät https://www.sauc
 
 **As a** logged-in user, **I want to** see a list of available products, **So that** I can browse and choose what to buy.
 
-> **Given** the user is logged in
-> **When** the user navigates to the products page
+> **Given** the user is logged in<br />
+> **When** the user navigates to the products page<br />
 > **Then** a list of products should be visible
 
 **Scenario: Sorting products by price (low to high)**
 
 **As a** user on the products page, **I want to** sort items by price (low to high), **So that** I can easily find the most affordable products first.
 
-> **Given** the user is on the products page
-> **When** the user selects "Price (low to high)" from the sorting dropdown
+> **Given** the user is on the products page<br />
+> **When** the user selects "Price (low to high)" from the sorting dropdown<br />
 > **Then** the products should be listed in ascending order of price
 
 
@@ -237,8 +237,8 @@ Testitapauksissa tarvitaan käyttäjätunnuksia, jotka löydät https://www.sauc
 
 **As a** user with an item in my cart, **I want to** remove an item from the cart, **So that** I can adjust my order before checkout.
 
-> **Given** the user has an item in the cart
-> **When** the user removes the item from the cart
+> **Given** the user has an item in the cart<br />
+> **When** the user removes the item from the cart<br />
 > **Then** the cart should be empty
 
 **Scenario: Proceeding to checkout**
@@ -256,9 +256,9 @@ Testitapauksissa tarvitaan käyttäjätunnuksia, jotka löydät https://www.sauc
 
 **As a** customer at checkout, **I want to** enter my payment and shipping details, **So that** I can finalize my order and receive my products.
 
-> **Given** the user is on the checkout page
-> **When** the user enters valid checkout information
-> **And** the user completes the purchase
+> **Given** the user is on the checkout page<br />
+> **When** the user enters valid checkout information<br />
+> **And** the user completes the purchase<br />
 > **Then** a confirmation message should be displayed
 
 

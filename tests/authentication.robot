@@ -40,6 +40,10 @@ The user enters an invalid username or password
     Type Text    id=user-name    standard_user
     Type Text    id=password    "wrong password"
 
+the user enters credentials for a locked-out user
+    Type Text    id=user-name    locked_out_user
+    Type Text    id=password    secret_sauce
+
 The user clicks the login button
     Click    text=Login
 
@@ -48,10 +52,6 @@ The user should be redirected to the products page
 
 An error message should be displayed
     Get Text    .error-message-container    contains    Username and password do not match any user in this service
-
-the user enters credentials for a locked-out user
-    Type Text    id=user-name    locked_out_user
-    Type Text    id=password    secret_sauce
 
 an error message should indicate that the user is locked out
     Get Text    .error-message-container    contains    Sorry, this user has been locked out.
