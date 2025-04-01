@@ -227,10 +227,16 @@ Testitapauksissa tarvitaan käyttäjätunnuksia, jotka löydät https://www.sauc
 
 **As a** user browsing products, **I want to** add a product to my cart, **So that** I can purchase it later.
 
+> **Given** the user is on the products page<br />
+> **When** the user adds a product to the cart<br />
+> **Then** the product should be added to the cart
+
+**Scenario: seeing the correct number of items in the cart**
+
 **As a** user who has added products to the cart, **I want to** see the correct number of items displayed in the cart **So that** I can verify my selections before proceeding to checkout.
 
 > **Given** the user is on the products page<br />
-> **When** the user adds a product to the cart<br />
+> **When** the user adds multiple products to the cart<br />
 > **Then** the cart icon should show the correct item count
 
 **Scenario: Removing an item from the cart**
