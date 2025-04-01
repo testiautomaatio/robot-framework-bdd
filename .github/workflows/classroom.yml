@@ -72,21 +72,11 @@ jobs:
         timeout: 1
         max-score: 10
 
-    - name: Product list is displayed after login
+    - name: Sorting products by price (low to high)
       id: products-2
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: Product list is displayed after login
-        setup-command: ''
-        command: "./.github/find_trace.sh 'Sauce Labs Backpack'"
-        timeout: 1
-        max-score: 10
-
-    - name: Product list is displayed after login
-      id: products-3
-      uses: classroom-resources/autograding-command-grader@v1
-      with:
-        test-name: Product list is displayed after login
+        test-name: Sorting products by price (low to high)
         setup-command: ''
         command: "./.github/find_trace.sh 'Price (low to high)'"
         timeout: 1
@@ -120,7 +110,7 @@ jobs:
         setup-command: ''
         command: "./.github/find_trace.sh 'checkout-step-one.html'"
         timeout: 1
-        max-score: 10
+        max-score: 15
 
     - name: Completing a purchase
       id: completing-1
@@ -130,7 +120,7 @@ jobs:
         setup-command: ''
         command: "./.github/find_trace.sh 'checkout-step-two.html'"
         timeout: 1
-        max-score: 10
+        max-score: 15
 
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
@@ -140,14 +130,13 @@ jobs:
         LOGIN-3_RESULTS: "${{steps.login-3.outputs.result}}"
         PRODUCTS-1_RESULTS: "${{steps.products-1.outputs.result}}"
         PRODUCTS-2_RESULTS: "${{steps.products-2.outputs.result}}"
-        PRODUCTS-3_RESULTS: "${{steps.products-3.outputs.result}}"
         CART-1_RESULTS: "${{steps.cart-1.outputs.result}}"
         CART-2_RESULTS: "${{steps.cart-2.outputs.result}}"
         CART-3_RESULTS: "${{steps.cart-3.outputs.result}}"
         COMPLETING-1_RESULTS: "${{steps.completing-1.outputs.result}}"
 
       with:
-        runners: login-1,login-2,login-3,products-1,products-2,products-3,cart-1,cart-2,cart-3,completing-1
+        runners: login-1,login-2,login-3,products-1,products-2,cart-1,cart-2,cart-3,completing-1
 
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
