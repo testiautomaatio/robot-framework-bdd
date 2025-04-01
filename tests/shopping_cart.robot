@@ -57,6 +57,7 @@ The cart icon should show the correct item count
 
 The user has an item in the cart
     The user adds a product to the cart
+    Get Text    .shopping_cart_badge    ==    1
 
 The user removes the item from the cart
     Click    id=remove-sauce-labs-backpack
