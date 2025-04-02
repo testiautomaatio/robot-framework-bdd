@@ -1,3 +1,9 @@
+*** Comments ***
+In this exercise, you will need to implement your own test cases and keywords.
+Use the Browser library and their keyword documentation at
+https://marketsquare.github.io/robotframework-browser/Browser.html
+
+
 *** Settings ***
 Library             Browser
 

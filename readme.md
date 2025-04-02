@@ -2,11 +2,15 @@
 
 Tässä harjoituksessa harjoittelet end-to-end (E2E) -testien kirjoittamista käyttäen [**Robot Frameworkia**](https://robotframework.org/) ja [**Browser-kirjastoa**](https://robotframework-browser.org/). Tavoitteena on automatisoida keskeisiä käyttäjäpolkuja [SauceDemo](https://www.saucedemo.com/)-verkkosivustolla, joka on yleisesti käytetty harjoitteluympäristö web-automaatiolle.
 
+Suosittelemme alkuun pääsemiseksi katsomaan [Robot Framework tutorial (youtube.com)](https://www.youtube.com/playlist?list=PLSK6YK5OGX1AuQy0tbvdKBV9mrKi46kKH) -soittolistan videot.
+
 Testit on tässä harjoituksessa tarkoitus kirjoittaa noudattaen **behavior-driven development (BDD)** -periaatteita:
 
 > *"Behavior-driven development (BDD) involves naming software tests using domain language to describe the behavior of the code."*
 >
 > https://en.wikipedia.org/wiki/Behavior-driven_development
+
+BDD:ssä testitapaukset kirjoitetaan luonnollisella kielellä ja ne kuvaavat ohjelman toimintaa käyttäjän näkökulmasta. Robot Framework tukee BDD-testausta ja sen avulla testitapaukset voidaan kirjoittaa käyttäen luonnollista kieltä.
 
 
 ## Asennukset
@@ -55,21 +59,21 @@ rfbrowser --version
 Seuraavaksi tarvitset Playwright-työkalun sekä siihen kuuluvat testiselaimet. Ne asennetaan Browser-kirjaston avulla käyttäen `rfbrowser`-komentoa:
 
 ```sh
-# Initialize the Browser library (installs all browsers):
+# initialize the Browser library (installs all browsers):
 rfbrowser init
 ```
 
 Jos haluat käyttää vain tiettyä selainta, voit valita sen asentamalla vain sen:
 
 ```sh
-# Only install Chromium:
+# alternatively, only install Chromium:
 rfbrowser init chromium
 ```
 
 Harjoituksen tai kurssin lopuksi, kun et enää tarvitse selaimia, voit vapauttaa tilaa ja poistaa testiselaimet komennolla:
 
 ``` sh
-# Clean old browser binaries and node dependencies:
+# clean up browsers and node dependencies:
 rfbrowser clean-node
 ```
 
@@ -80,7 +84,7 @@ rfbrowser clean-node
 
 ## Testien suorittaminen
 
-Kun olet saanut Robot Frameworkin ja Browser-kirjaston asennettua, voit kokeilla suorittaa ensimmäisiä testejä. Tässä repositoriossa on valmiiksi määritelty testitiedosto [`tests/example.robot`](./tests/example.robot), joka sisältää yksinkertaisen testin. Voit suorittaa kyseinen testitiedosto komennolla:
+Kun olet saanut Robot Frameworkin ja Browser-kirjaston asennettua, voit kokeilla suorittaa ensimmäisiä testejä. Tässä repositoriossa on valmiiksi määritelty testitiedosto [`tests/example.robot`](./tests/example.robot), joka sisältää yksinkertaisen testin. Voit suorittaa kyseisen testitiedoston komennolla:
 
 ```sh
 robot tests/example.robot
@@ -126,13 +130,13 @@ The user should be redirected to the products page
     Get Url      should end with      inventory.html
 ```
 
-Yllä esiintyvät *"The user..."*-alkuiset avainsanat ovat oman testitapauksen vaiheita vastaavat avainsanat. Voit ajatella niitä ikään kuin funktioina, joiden sisällä on yksi tai useampi Robot Frameworkin kirjaston avainsana. Robot Frameworkin syntaksissa avainsanat erotetaan testeistä kolmen tähden rivillä `*** Keywords ***`. Kunkin avainsanan operaatiot kirjoitetaan omille riveilleen ja ne suoritetaan testitapauksen vaiheiden mukaisessa järjestyksessä.
+Yllä esiintyvät *"The user..."*-alkuiset avainsanat ovat oman testitapauksen vaiheita vastaavat avainsanat. Voit ajatella niitä ikään kuin funktioina, joiden sisällä on yksi tai useampi Robot Frameworkin kirjaston avainsana. Robot Frameworkin syntaksissa avainsanat erotetaan testeistä kolmen tähden rivillä `*** Keywords ***`. Kunkin avainsanan operaatiot kirjoitetaan omille riveilleen ja ne suoritetaan testitapauksen vaiheiden mukaisessa järjestyksessä. Avainsanoissa kirjainkoolla ei ole merkitystä ja niiden alkuun voidaan lisätä myös ylimääräisiä sanoja, kuten `given`, `when`, `then` ja `and`. Esimerkiksi yllä olevassa testissä rivi `Given the user is on the login page` viittaa alempana määritettyyn avainsanaan `The user is on the login page`.
 
-Robot Framework noudattaa Pythonin tavoin sisennyksiä koodilohkojen erottamiseksi. Yksittäiset operaatiot koostuvat eri osista, kuten avainsanasta ja sen argumenteista, jotka erotetaan toisistaan käyttämällä useita välilyöntejä.
+Robot Framework noudattaa Pythonin tavoin sisennyksiä koodilohkojen erottamiseksi. Yksittäiset operaatiot koostuvat eri osista, kuten avainsanasta ja sen argumenteista, jotka erotetaan toisistaan käyttämällä useita välilyöntejä. Esimerkiksi rivi `Type Text  id=user-name  standard_user` koostuu kolmesta osasta: avainsanasta, selektorista ja tekstistä. Nämä täytyy erottaa toisistaan vähintään kahdella välilyönnillä, jotta Robot Framework ymmärtää, että kyseessä on kolme erillistä osaa.
 
 Yllä olevassa esimerkissä avainsanat `New Page`, `Type Text`, `Click` ja `Get Url` ovat [Browser-kirjaston avainsanoja](https://marketsquare.github.io/robotframework-browser/Browser.html), joiden avulla voidaan ohjata web-selainta ja tarkastaa sivuston tilaa. Kaikki Browser-kirjaston avainsanat on dokumentoitu sen omilla sivuilla: https://marketsquare.github.io/robotframework-browser/Browser.html.
 
-Edellä oleva esimerkki löytyy tehtäväreposta tiedostosta [`tests/bdd_example.robot`](./tests/bdd_example.robot). Voit kokeilla suorittaa kyseisen testitiedoston komennolla:
+Yllä oleva esimerkki löytyy tehtäväreposta tiedostosta [`tests/bdd_example.robot`](./tests/bdd_example.robot). Voit kokeilla suorittaa kyseisen testitiedoston komennolla:
 
 ```sh
 robot tests/bdd_example.robot
@@ -143,11 +147,12 @@ BDD-syntaksista kerrotaan Robot Frameworkin dokumentaatiossa kappaleessa [BDD (B
 
 ## Omat testit
 
-**SauceDemo** (https://www.saucedemo.com/) on testauskäyttöön tarkoitettu verkkokauppa, jossa käyttäjät voivat kirjautua sisään, selata tuotteita, lisätä niitä ostoskoriin ja suorittaa ostotapahtuman. Sivusto sisältää erilaisia testattavia skenaarioita, kuten erilaisia käyttäjärooleja, kuten lukittu käyttäjätili, sekä tuotteiden lajittelutoimintoja.
+**SauceDemo** (https://www.saucedemo.com/) on testauskäyttöön tarkoitettu verkkokauppa, jossa käyttäjät voivat kirjautua sisään, selata tuotteita, lisätä niitä ostoskoriin ja suorittaa ostotapahtuman.
 
-Tässä harjoituksessa tavoitteena on automatisoida keskeisiä käyttäjäpolkuja [SauceDemo-verkkosivustolla](https://www.saucedemo.com/). Testattavat skenaariot  löytyvät olevasta listasta. Voit myös keksiä lisäksi omia skenaarioita, jos haluat.
+Tässä harjoituksessa tavoitteena on automatisoida keskeisiä käyttäjäpolkuja [SauceDemo-verkkosivustolla](https://www.saucedemo.com/). Testattavat skenaariot  löytyvät olevasta listasta. Voit myös halutessasi luoda lisäksi omia skenaarioita.
 
-Jaa testisi eri tiedostoihin [tests](./tests/)-hakemiston alle parhaaksi katsoamallasi tavalla hyödyntäen [Robot Frameworkin Project Structure -ohjetta](https://docs.robotframework.org/docs/examples/project_structure). Voit myös määritellä yhteisiä avainsanoja, jotka voivat olla käytössä useissa testitapauksissa. Tällaiset avainsanat voidaan määritellä omassa tiedostossaan ja tuoda muihin testitiedostoihin [`Resource`-avainsanalla](https://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#resource-and-variable-files).
+Jaa testisi eri tiedostoihin [tests](./tests/)-hakemiston alle parhaaksi katsoamallasi tavalla hyödyntäen [Robot Frameworkin Project Structure -ohjetta](https://docs.robotframework.org/docs/examples/project_structure). Voit myös määritellä yhteisiä avainsanoja, jotka voivat olla käytössä useissa testitapauksissa. Tällaiset avainsanat voidaan määritellä omassa tiedostossaan ja tuoda muihin testitiedostoihin [`Resource`-avainsanalla](https://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#resource-and-variable-files). Alkuun kuitenkin riittää, että saat testitapauksia kirjoitettua ja tyyli on toissijainen asia.
+
 
 ### Tracing
 
@@ -162,12 +167,10 @@ Test Setup          New Context    tracing=True
 Test Teardown       Close Context
 ```
 
-Trace-tiedostot tallentuvat projektiisi zip-tiedostoina, joita voit tarkastella [Playwrightin Trace viewer -työkalulla](https://playwright.dev/docs/trace-viewer). Työkalua voidaan käyttää paikallisesti asennettuna tai kätevästi osoitteessa https://trace.playwright.dev/. Katso tästä Playwrightin oma esimerkki [trace-tiedostosta](https://trace.playwright.dev/?trace=https://demo.playwright.dev/reports/todomvc/data/fa874b0d59cdedec675521c21124e93161d66533.zip) sekä [esimerkkiin liittyvä video](https://youtu.be/yP6AnTxC34s).
+Trace-tiedostot tallentuvat projektiisi zip-tiedostoina, joita voit tarkastella [Playwrightin Trace viewer -työkalulla](https://playwright.dev/docs/trace-viewer). Työkalua voidaan käyttää paikallisesti asennettuna tai vaihtoehtoisesti osoitteessa https://trace.playwright.dev/. Katso tästä Playwrightin oma esimerkki [trace-tiedostosta](https://trace.playwright.dev/?trace=https://demo.playwright.dev/reports/todomvc/data/fa874b0d59cdedec675521c21124e93161d66533.zip) sekä [esimerkkiin liittyvä video](https://youtu.be/yP6AnTxC34s).
 
 
 ## Testattavat skenaariot
-
-Alla on luettelo testattavista skenaarioista, jotka sinun tulee toteuttaa. Voit jakaa testisi useisiin tiedostoihin.
 
 Testitapauksissa tarvitaan käyttäjätunnuksia, jotka löydät https://www.saucedemo.com/ -sivuston etusivulta kirjautumisen yhteydessä. Huomaa, että tarvitset eri testeissä eri tunnuksia riippuen siitä, mitä ominaisuutta olet testaamassa (esim. lukittu tunnus). Tuotteiden listauksen ja ostamiseen liittyvissä testeissä ei tarvitse käyttää bugisia tunnuksia, vaan `standard_user`-tunnus riittää niihin hyvin.
 
@@ -270,9 +273,9 @@ Testitapauksissa tarvitaan käyttäjätunnuksia, jotka löydät https://www.sauc
 
 ## Tehtävän palauttaminen
 
-Kun olet kirjoittanut testitapaukset ja varmistanut, että ne toimivat odotetusti, voit palauttaa tehtävän tarkastusta varten. Lisää luomasi testitiedostot versionhallintaan ja lähetä muutokset GitHubiin `git status`, `git add`, `git commit` ja `git push` -komennoilla.
+Kun olet kirjoittanut testitapaukset ja varmistanut, että ne toimivat odotetusti, voit palauttaa tehtävän automaattista arviointia varten. Lisää luomasi testitiedostot versionhallintaan ja lähetä muutokset GitHubiin `git status`, `git add`, `git commit` ja `git push` -komennoilla.
 
-Mikäli et saa oikeaa määrää pisteitä automaattisesta arvioinnista, tarkasta, että olet huomioinut ylempänä ohjeistetun "trace"-tiedostojen luomisen.
+Arvioinnin tulos löytyy hetken kuluttua actions-välilehdeltä. Mikäli et saa oikeaa määrää pisteitä automaattisesta arvioinnista, varmista, että olet huomioinut ylempänä ohjeistetun "trace"-tiedostojen luomisen.
 
 
 ## Lisenssit

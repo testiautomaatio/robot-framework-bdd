@@ -1,5 +1,5 @@
 *** Comments ***
-# This example has been borrowed from https://github.com/MarketSquare/robotframework-browser
+This example has been borrowed from https://github.com/MarketSquare/robotframework-browser
 
 
 *** Settings ***
