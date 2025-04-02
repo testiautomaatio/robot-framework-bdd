@@ -72,7 +72,7 @@ rfbrowser init chromium
 
 Harjoituksen tai kurssin lopuksi, kun et enää tarvitse selaimia, voit vapauttaa tilaa ja poistaa testiselaimet komennolla:
 
-``` sh
+```sh
 # clean up browsers and node dependencies:
 rfbrowser clean-node
 ```
@@ -181,28 +181,37 @@ Testitapauksissa tarvitaan käyttäjätunnuksia, jotka löydät https://www.sauc
 
 **As a** registered user, **I want to** log in with valid credentials, **So that** I can access the products page and shop.
 
-> **Given** the user is on the login page<br />
-> **When** the user enters valid credentials<br />
-> **And** the user clicks the login button<br />
-> **Then** the user should be redirected to the products page
+```RobotFramework
+Successful login with a valid user
+    Given the user is on the login page
+    When the user enters valid credentials
+    And the user clicks the login button
+    Then the user should be redirected to the products page
+```
 
 **Scenario: Login with an invalid user**
 
 **As a** user who enters incorrect credentials, **I want to** see an error message, **So that** I understand that my login attempt failed.
 
-> **Given** the user is on the login page<br />
-> **When** the user enters an invalid username or password<br />
-> **And** the user clicks the login button<br />
-> **Then** an error message should be displayed
+```RobotFramework
+Login with an invalid user
+    Given the user is on the login page
+    When the user enters an invalid username or password
+    And the user clicks the login button
+    Then an error message should be displayed
+```
 
 **Scenario: Login with a locked-out user**
 
 **As a** locked-out user, **I want to** be informed that my account is locked, **So that** I know I cannot proceed and need assistance.
 
-> **Given** the user is on the login page<br />
-> **When** the user enters credentials for a locked-out user<br />
-> **And** the user clicks the login button<br />
-> **Then** an error message should indicate that the user is locked out
+```RobotFramework
+Login with a locked-out user
+    Given the user is on the login page
+    When the user enters credentials for a locked-out user
+    And the user clicks the login button
+    Then an error message should indicate that the user is locked out
+```
 
 
 ### Tuotteiden selaaminen ja lajittelu
@@ -211,17 +220,23 @@ Testitapauksissa tarvitaan käyttäjätunnuksia, jotka löydät https://www.sauc
 
 **As a** logged-in user, **I want to** see a list of available products, **So that** I can browse and choose what to buy.
 
-> **Given** the user is logged in<br />
-> **When** the user navigates to the products page<br />
-> **Then** a list of products should be visible
+```RobotFramework
+Product list is displayed after login
+    Given the user is logged in
+    When the user navigates to the products page
+    Then a list of products should be visible
+```
 
-**Scenario: Sorting products by price (low to high)**
+**Scenario: Sorting products by price**
 
 **As a** user on the products page, **I want to** sort items by price (low to high), **So that** I can easily find the most affordable products first.
 
-> **Given** the user is on the products page<br />
-> **When** the user selects "Price (low to high)" from the sorting dropdown<br />
-> **Then** the products should be listed in ascending order of price
+```RobotFramework
+Sorting products by price
+    Given the user is on the products page
+    When the user selects "price low to high" from the sorting dropdown
+    Then the products should be listed in ascending order of price
+```
 
 
 ### Ostoskori
@@ -230,33 +245,45 @@ Testitapauksissa tarvitaan käyttäjätunnuksia, jotka löydät https://www.sauc
 
 **As a** user browsing products, **I want to** add a product to my cart, **So that** I can purchase it later.
 
-> **Given** the user is on the products page<br />
-> **When** the user adds a product to the cart<br />
-> **Then** the product should be added to the cart
+```RobotFramework
+Adding an item to the cart
+    Given the user is on the products page
+    When the user adds a product to the cart
+    Then the product should be added to the cart
+```
 
-**Scenario: seeing the correct number of items in the cart**
+**Scenario: Seeing the correct number of items in the cart**
 
 **As a** user who has added products to the cart, **I want to** see the correct number of items displayed in the cart **So that** I can verify my selections before proceeding to checkout.
 
-> **Given** the user is on the products page<br />
-> **When** the user adds multiple products to the cart<br />
-> **Then** the cart icon should show the correct item count
+```RobotFramework
+Seeing the correct number of items in the cart
+    Given the user is on the products page
+    When the user adds multiple products to the cart
+    Then the cart icon should show the correct item count
+```
 
 **Scenario: Removing an item from the cart**
 
 **As a** user with an item in my cart, **I want to** remove an item from the cart, **So that** I can adjust my order before checkout.
 
-> **Given** the user has an item in the cart<br />
-> **When** the user removes the item from the cart<br />
-> **Then** the cart should be empty
+```RobotFramework
+Removing an item from the cart
+    Given the user has an item in the cart
+    When the user removes the item from the cart
+    Then the cart should be empty
+```
 
 **Scenario: Proceeding to checkout**
 
 **As a** user with items in my cart, **I want to** proceed to checkout, **So that** I can complete my purchase.
 
-> **Given** the user has items in the cart<br />
-> **When** the user clicks the checkout button<br />
-> **Then** the checkout page should be displayed
+```RobotFramework
+Proceeding to checkout
+    Given the user has items in the cart
+    When the user clicks the checkout button
+    Then the checkout page should be displayed
+```
 
 
 ### Maksuprosessi
@@ -265,10 +292,13 @@ Testitapauksissa tarvitaan käyttäjätunnuksia, jotka löydät https://www.sauc
 
 **As a** customer at checkout, **I want to** enter my payment and shipping details, **So that** I can finalize my order and receive my products.
 
-> **Given** the user is on the checkout page<br />
-> **When** the user enters valid checkout information<br />
-> **And** the user completes the purchase<br />
-> **Then** a confirmation message should be displayed
+```RobotFramework
+Completing a purchase
+    Given the user is on the checkout page
+    When the user enters valid checkout information
+    And the user completes the purchase
+    Then a confirmation message should be displayed
+```
 
 
 ## Tehtävän palauttaminen
