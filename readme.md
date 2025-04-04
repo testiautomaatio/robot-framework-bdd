@@ -56,7 +56,7 @@ rfbrowser --version
 
 `robotframework-browser`-paketin tarkemmat tiedot löytyvät osoitteesta https://pypi.org/project/robotframework-browser/.
 
-Seuraavaksi tarvitset Playwright-työkalun sekä siihen kuuluvat testiselaimet. Ne asennetaan Browser-kirjaston avulla käyttäen `rfbrowser`-komentoa:
+Seuraavaksi tarvitset Playwright-työkalun sekä siihen kuuluvat testiselaimet. Ne asennetaan Browser-kirjaston avulla käyttäen `rfbrowser init`-komentoa:
 
 ```sh
 # initialize the Browser library (installs all browsers):
@@ -69,6 +69,8 @@ Jos haluat käyttää vain tiettyä selainta, voit valita sen asentamalla vain s
 # alternatively, only install Chromium:
 rfbrowser init chromium
 ```
+
+**Playwright**-työkalua ei tarvitse erikseen asentaa Browser-kirjastoa käytettäessä, vaan se asentuu edellä mainituilla komennoilla.
 
 Harjoituksen tai kurssin lopuksi, kun et enää tarvitse selaimia, voit vapauttaa tilaa ja poistaa testiselaimet komennolla:
 

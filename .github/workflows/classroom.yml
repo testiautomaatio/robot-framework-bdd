@@ -154,4 +154,4 @@ jobs:
       with:
         name: results
         path: results
-        retention-days: 1
+        retention-days: 3
