@@ -33,8 +33,8 @@ Pikaohjeen mukaan voit asentaa Robot Frameworkin PIP-paketinhallintajärjestelm�
 # Install Robot Framework with pip:
 pip install robotframework
 
-# Verify the installation:
-robot --version
+# Verify the installation (prints usage instructions):
+robot --help
 ```
 
 👆 Komennossa käytetty pip-pakettienhallinta asentuu oletuksena Pythonin mukana. Asennettavan `robotframework`-paketin tarkemmat tiedot löytyvät pypi.org-sivustolta https://pypi.org/project/robotframework/.
@@ -50,8 +50,8 @@ Tutustu [Browser-kirjaston ohjeisiin](https://robotframework-browser.org/#instal
 # Install Browser library from PyPi with pip:
 pip install robotframework-browser
 
-# Verify the installation:
-rfbrowser --version
+# Verify the installation (prints usage instructions):
+rfbrowser --help
 ```
 
 `robotframework-browser`-paketin tarkemmat tiedot löytyvät osoitteesta https://pypi.org/project/robotframework-browser/.
