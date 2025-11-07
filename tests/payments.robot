@@ -1,10 +1,9 @@
 *** Settings ***
 Library             Browser
 
-# The following lines are required for automatic assessment of the exercise.
-# Tracing means that the browser will record each step of the test.
-# These steps are then used to verify the correctness of the exercise.
-Test Setup          New Context    tracing=True
+Resource            ./keywords/utils.robot
+
+Test Setup          Setup test environment (logged in)
 Test Teardown       Close Context
 
 
@@ -17,12 +16,11 @@ Completing a purchase
 
 
 *** Keywords ***
-The user logs in
-    New Page    https://www.saucedemo.com/
-    Type Text    id=user-name    standard_user
-    Type Text    id=password    secret_sauce
-    Click    text=Login
-    Get Url    should end with    inventory.html
+
+The user is on the checkout page
+    The user adds a product to the cart
+    The user clicks the checkout button
+    The checkout page should be displayed
 
 The user adds a product to the cart
     Click    id=add-to-cart-sauce-labs-backpack
@@ -34,20 +32,14 @@ The user clicks the checkout button
 The checkout page should be displayed
     Get Url    should end with    /checkout-step-one.html
 
-The user is on the checkout page
-    The user logs in
-    The user adds a product to the cart
-    The user clicks the checkout button
-    The checkout page should be displayed
-
 The user enters valid checkout information
-    Type Text    id=first-name    Tester
-    Type Text    id=last-name    Robot
-    Type Text    id=postal-code    90210
+    Fill Text    id=first-name    Tester
+    Fill Text    id=last-name     Robot
+    Fill Text    id=postal-code   90210
 
 The user completes the purchase
-    Click    input#continue
-    Click    button#finish
+    Click        input#continue
+    Click        button#finish
 
 A confirmation message should be displayed
-    Get Text    h2.complete-header    *=    Thank you for your order!
+    Get Text    h2.complete-header    contains    Thank you for your order!

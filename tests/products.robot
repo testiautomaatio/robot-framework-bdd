@@ -1,10 +1,8 @@
 *** Settings ***
-Library             Browser
+Resource            ./keywords/login.robot
+Resource            ./keywords/utils.robot
 
-# The following lines are required for automatic assessment of the exercise.
-# Tracing means that the browser will record each step of the test.
-# These steps are then used to verify the correctness of the exercise.
-Test Setup          New Context    tracing=True
+Test Setup          Setup test environment
 Test Teardown       Close Context
 
 
@@ -22,29 +20,29 @@ Sorting products by price (low to high)
 
 *** Keywords ***
 The user is logged in
-    New Page    https://www.saucedemo.com/
-    Type Text    id=user-name    standard_user
-    Type Text    id=password    secret_sauce
-    Click    text=Login
-    Get Url    should end with    inventory.html
+    Login
 
 The user navigates to the products page
     New Page    https://www.saucedemo.com/inventory.html
 
 A list of products should be visible
-    Get Text    .header_secondary_container    *=    Products
+    Get Text    .header_secondary_container    contains    Products
 
 The user is on the products page
-    The user is logged in
+    Login
     The user navigates to the products page
 
-the user selects "Price low to high" from the sorting dropdown
+The user selects "Price low to high" from the sorting dropdown
     Select Options By    .product_sort_container    text    Price (low to high)
 
-the products should be listed in ascending order of price
-    Get Text    .inventory_list >> .inventory_item_name >> nth=0    *=    Sauce Labs Onesie
-    Get Text    .inventory_list >> .inventory_item_name >> nth=1    *=    Sauce Labs Bike Light
-    Get Text    .inventory_list >> .inventory_item_name >> nth=2    *=    Sauce Labs Bolt T-Shirt
-    Get Text    .inventory_list >> .inventory_item_name >> nth=3    *=    Test.allTheThings() T-Shirt (Red)
-    Get Text    .inventory_list >> .inventory_item_name >> nth=4    *=    Sauce Labs Backpack
-    Get Text    .inventory_list >> .inventory_item_name >> nth=5    *=    Sauce Labs Fleece Jacket
+The products should be listed in ascending order of price
+    Assert product 0 is Sauce Labs Onesie
+    Assert product 1 is Sauce Labs Bike Light
+    Assert product 2 is Sauce Labs Bolt T-Shirt
+    Assert product 3 is Test.allTheThings() T-Shirt (Red)
+    Assert product 4 is Sauce Labs Backpack
+    Assert product 5 is Sauce Labs Fleece Jacket
+
+Assert product ${index} is ${product_name}
+    ${locator}=    Set Variable    .inventory_list >> .inventory_item_name >> nth=${index}
+    Get Text    ${locator}    contains    ${product_name}
