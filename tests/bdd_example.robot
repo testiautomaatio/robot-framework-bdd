@@ -5,11 +5,10 @@ https://marketsquare.github.io/robotframework-browser/Browser.html
 
 
 *** Settings ***
+# Importing the Browser library adds the New Page, Click, Fill Text, and Get Url keywords:
 Library             Browser
 
-# The following lines are required for automatic assessment of the exercise.
-# Tracing means that the browser will record each step of the test.
-# These steps are then used to verify the correctness of the exercise.
+# The following lines are required for automatic assessment of the exercise:
 Test Setup          New Context    tracing=True
 Test Teardown       Close Context
 
@@ -24,14 +23,23 @@ Successful login with a valid user
 
 *** Keywords ***
 The user is on the login page
-    New Page    https://www.saucedemo.com/
+    # New Page uses Playwright to open a new browser tab:
+    # https://marketsquare.github.io/robotframework-browser/Browser.html#New%20Page
+    New Page     https://www.saucedemo.com/
 
 The user enters valid credentials
-    Type Text    id=user-name    standard_user
-    Type Text    id=password    secret_sauce
+    # Fill Text is used to enter text into input fields. It takes a selector and the text to enter:
+    # https://marketsquare.github.io/robotframework-browser/Browser.html#Fill%20Text
+    Fill Text    id=user-name    standard_user
+    Fill Text    id=password    secret_sauce
 
 The user clicks the login button
-    Click    text=Login
+    # Click locates the given element and simulates a mouse click on it:
+    # https://marketsquare.github.io/robotframework-browser/Browser.html#Click
+    Click        text=Login
 
 The user should be redirected to the products page
-    Get Url    should end with    inventory.html
+    # At the end of each test case, it is important to verify that the expected outcome 
+    # has been achieved. This can be done using assertions provided by the Browser library:
+    # https://marketsquare.github.io/robotframework-browser/Browser.html#Assertions
+    Get Url      should end with  inventory.html
