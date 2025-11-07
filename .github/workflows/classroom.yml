@@ -12,18 +12,26 @@ jobs:
     if: github.actor != 'github-classroom[bot]'
     env:
       CI: true
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+
+    - name: Disable man-db auto-update (prevents apt-get hangs)
+      run: sudo rm -f /var/lib/man-db/auto-update
+
     - name: Install Robot Framework
       run: pip install robotframework
       timeout-minutes: 2
+
     - name: Install Browser library
       run: pip install robotframework-browser
       timeout-minutes: 2
+
     - name: Install Chromium browser
       run: rfbrowser init chromium
       timeout-minutes: 2
+
     - name: Run tests
       run: robot --outputdir=results/ tests/
       timeout-minutes: 5
@@ -154,4 +162,4 @@ jobs:
       with:
         name: results
         path: results
-        retention-days: 3
+        retention-days: 7
