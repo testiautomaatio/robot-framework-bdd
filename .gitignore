@@ -10,3 +10,6 @@ results/
 
 # Browser library temp files
 /browser/
+
+# Trace files
+traces
