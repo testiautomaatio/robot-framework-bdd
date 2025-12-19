@@ -1,3 +1,5 @@
+[English version of this readme is available in the file readme.en.md](./readme.en.md)
+
 # BDD-harjoitus Robot Frameworkilla
 
 Tässä harjoituksessa harjoittelet end-to-end (E2E) -testien kirjoittamista käyttäen [**Robot Frameworkia**](https://robotframework.org/) ja [**Browser-kirjastoa**](https://robotframework-browser.org/). Tavoitteena on automatisoida keskeisiä käyttäjäpolkuja [SauceDemo](https://www.saucedemo.com/)-verkkosivustolla, joka on yleisesti käytetty harjoitteluympäristö web-automaatiolle.
@@ -131,6 +133,10 @@ Varsinaiset tekniset toimenpiteet, kuten sivuston elementtien tunnistaminen ja k
 Seuraavassa esimerkissä on määritetty edellä olevan testitapauksen avainsanat, josta näkyy, miten testitapauksen eri vaiheet toteutetaan teknisesti. Avainsanan sisällä hyödynnetään Browser-kirjaston avainsanoja, kuten `New Page`, `Fill Text`, `Click` ja `Get Url`:
 
 ```robot
+*** Settings ***
+# Importing the Browser library adds the New Page, Click, Fill Text, and Get Url keywords:
+Library          Browser
+
 *** Keywords ***
 
 The user is on the login page
