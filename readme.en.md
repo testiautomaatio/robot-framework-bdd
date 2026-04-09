@@ -19,80 +19,9 @@ In BDD, test cases are written in natural language and describe the system behav
 
 ## Installations
 
-Robot Framework is Python-based, so you need [Python and the pip package manager installed](https://www.python.org/downloads/).
+Robot Framework is a Python-based test automation framework, so using it requires [Python and pip](https://www.python.org/downloads/) to be installed. In addition to Robot Framework, you need the Browser library, which enables controlling web browsers in your tests. The Browser library uses Playwright under the hood, and Playwright is implemented with Node.js, so Node.js must also be installed.
 
-In addition to Python and Robot Framework you need the [**Browser** library](https://robotframework-browser.org/) to drive web browsers in your tests. The Browser library uses [**Playwright**](https://playwright.dev) under the hood, which is built with Node.js, so Node.js must also be installed.
-
-* https://www.python.org/downloads/
-* https://nodejs.org/en/download
-
-We recommend using the latest LTS (Long-Term Support) versions of both Python and Node.js.
-
-
-### 1. Install Robot Framework
-
-The Robot Framework homepage provides a [quick install guide](https://robotframework.org/?tab=1#getting-started). A more detailed [installation guide](https://github.com/robotframework/robotframework/blob/master/INSTALL.rst) covers additional options.
-
-According to the quick guide you can install Robot Framework with pip:
-
-```sh
-# Install Robot Framework with pip:
-pip install robotframework
-
-# Verify the installation (prints usage instructions):
-robot --help
-```
-
-👆 The pip package manager used above is installed together with Python. Package details for `robotframework` are available on PyPI: https://pypi.org/project/robotframework/.
-
-
-### 2. Install the required packages
-
-Robot Framework provides core features to run tests, but it does not ship with a ready-made library for browser control. For that you need a separate library such as the [Browser library](https://robotframework-browser.org/), which wraps [Playwright](https://playwright.dev) for browser automation.
-
-Follow the [Browser library installation instructions](https://robotframework-browser.org/#installation). The quick install with pip looks like this:
-
-```sh
-# Install Browser library from PyPI with pip:
-pip install robotframework-browser
-
-# Verify the installation (prints usage instructions):
-rfbrowser --help
-```
-
-Package details for `robotframework-browser` are available at https://pypi.org/project/robotframework-browser/.
-
-Next you need Playwright and its bundled test browsers. Install them through the Browser library with `rfbrowser init`:
-
-```sh
-# initialize the Browser library (installs all browsers):
-rfbrowser init
-```
-
-If you only want a specific browser, specify it in the install command:
-
-```sh
-# alternatively, only install Chromium:
-rfbrowser init chromium
-```
-
-You do not need to install **Playwright** separately when using the Browser library; it is installed by the commands above.
-
-At the end of the exercise or course, when you no longer need the browsers, you can free disk space by removing the test browsers:
-
-```sh
-# clean up browsers and node dependencies:
-rfbrowser clean-node
-
-# optionally, uninstall Robot Framework and Browser library:
-pip uninstall robotframework-browser
-pip uninstall robotframework
-```
-
-
-### 3. Install the VS Code extension
-
-The [Robot Framework docs](https://docs.robotframework.org/docs/getting_started/ide) recommend VS Code together with the [RobotCode](https://marketplace.visualstudio.com/items?itemName=d-biehl.robotcode) extension for writing and running tests. We suggest reviewing the extension and installing it if you wish. It provides [syntax highlighting, auto-completion, and the ability to run tests directly from the editor](https://robotcode.io/) ([robotcode.io](https://robotcode.io/)).
+Detailed installation instructions and information about the ready-made devcontainer solution can be found in the separate [installations.md](./installations.md) file.
 
 
 ## Running tests
@@ -100,7 +29,7 @@ The [Robot Framework docs](https://docs.robotframework.org/docs/getting_started/
 Once Robot Framework and the Browser library are installed, you can try running your first tests. This repository includes a ready-made test file [`tests/example.robot`](./tests/example.robot) with a simple test. Run it with:
 
 ```sh
-robot tests/example.robot
+robot --outputdir=test-results/ tests/example.robot
 ```
 
 The test should pass and print results to the console. Robot Framework also generates an HTML report you can open in a browser.
@@ -151,20 +80,20 @@ The user should be redirected to the products page
     Get Url      should end with      inventory.html
 ```
 
-The *"The user..."* keywords correspond to the Given-When-Then steps. Robot Framework keywords are reusable code blocks you can call from test cases.
+The *"The user..."* keywords above correspond to the Given-When-Then steps in the earlier snippet. Robot Framework keywords are reusable code blocks you can call from test cases.
 
 Treat your own keywords like functions containing one or more library keywords. In Robot Framework syntax, keywords are separated from tests by the `*** Keywords ***` header. Each keyword’s steps are on their own lines and run in the order dictated by the test.
 
 Keyword names are case-insensitive and can be prefixed with words such as `given`, `when`, `then`, and `and`. In the test above, the line `Given the user is on the login page` refers to the keyword `The user is on the login page` defined later.
 
-Robot Framework, like Python, uses indentation to separate code blocks. Each operation consists of parts (keyword and arguments) separated by multiple spaces. For example, `Fill Text  id=user-name  standard_user` has three parts: the keyword (`Fill Text`), the selector (`id=user-name`), and the text (`standard_user`). They must be separated by two or more spaces so Robot Framework recognizes them as distinct.
+Robot Framework, like Python, uses indentation to separate code blocks. Each operation consists of parts (keyword and arguments) separated by multiple spaces. For example, `Fill Text  id=user-name  standard_user` has three parts: the keyword (`Fill Text`), the selector (`id=user-name`), and the text (`standard_user`). They must be separated by *two or more spaces* so Robot Framework recognizes them as distinct.
 
 In the example above, the keywords `New Page`, `Fill Text`, `Click`, and `Get Url` are [Browser library keywords](https://marketsquare.github.io/robotframework-browser/Browser.html) used to control the browser and inspect page state. All Browser keywords are documented at https://marketsquare.github.io/robotframework-browser/Browser.html.
 
-You can find this example in [`tests/bdd_example.robot`](./tests/bdd_example.robot). Run it with:
+You can find this full BDD example in [`tests/bdd_example.robot`](./tests/bdd_example.robot). Run it with:
 
 ```sh
-robot tests/bdd_example.robot
+robot --outputdir=test-results/ tests/bdd_example.robot
 ```
 
 BDD syntax is covered in the Robot Framework documentation under [BDD (Behavior Driven Development)](https://docs.robotframework.org/docs/testcase_styles/bdd).
@@ -200,9 +129,9 @@ Trace files are stored in your project as zip files. You can inspect them with t
 
 ## Scenarios to test
 
-Test cases need credentials available on the SauceDemo front page. Use different accounts depending on the feature under test (e.g., the locked-out user for lockout scenarios).
+Test cases need credentials available on the [SauceDemo front page](https://www.saucedemo.com/). Use different accounts depending on the feature under test (e.g., the locked-out user for lockout scenarios).
 
-For product listing and purchasing flows you can use the `standard_user` account.
+For product listing and purchasing flows you should use the `standard_user` account.
 
 
 ### Login
