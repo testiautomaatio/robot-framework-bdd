@@ -199,6 +199,8 @@ Sorting products by price
     Then the products should be listed in ascending order of price
 ```
 
+💡 **Huom:** Voit olettaa, että tuotteet ja niiden hinnat eivät muutu. Sinun ei tarvitse vertailla hintoja testikoodissasi. Riittää että varmistat, että tietyt tuotteet ovat odotetuissa paikoissa lajittelun jälkeen.
+
 
 ### Ostoskori
 

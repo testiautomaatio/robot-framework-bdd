@@ -197,6 +197,7 @@ Sorting products by price
     Then the products should be listed in ascending order of price
 ```
 
+💡 **Note:** You can assume that the products and their prices do not change. You do not need to compare numbers in your test code, just verify that specific items are in expected positions after sorting.
 
 ### Cart
 
