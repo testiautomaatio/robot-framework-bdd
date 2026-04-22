@@ -49,11 +49,11 @@ BDD-testit kirjoitetaan käyttäen **Given-When-Then** -rakennetta, joka kuvaa t
 ```robot
 *** Test Cases ***
 
-Successful login with a valid user
-    Given the user is on the login page
-    When the user enters valid credentials
-    And the user clicks the login button
-    Then the user should be redirected to the products page
+Successful Login With A Valid User
+    Given The User Is On The Login Page
+    When The User Enters Valid Credentials
+    And The User Clicks The Login Button
+    Then The User Should Be Redirected To The Products Page
 ```
 
 Yllä oleva testitapaus kuvaa ohjelman toimintaa "luonnollisella kielellä" eikä sisällä teknisiä yksityiskohtia, kuten sivuston elementtien nimiä tai CSS-sääntöjä. Tämän on tarkoitus tehdä testitapauksista helpommin luettavia ja ymmärrettäviä.
