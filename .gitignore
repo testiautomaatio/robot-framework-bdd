@@ -4,6 +4,7 @@ output.xml
 report.html
 playwright-log.txt
 results/
+test-results/
 
 # VS Code
 .vscode/

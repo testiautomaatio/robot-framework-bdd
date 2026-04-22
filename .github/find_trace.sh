@@ -8,7 +8,7 @@ fi
 
 SEARCH_STRING="$1"
 
-if grep -rqi "$SEARCH_STRING" --include="*.trace" .; then
+if grep -rqi "$SEARCH_STRING" --include="*.trace" __traces__; then
     echo "'$SEARCH_STRING' was found in test traces."
     exit 0  # Success
 else
