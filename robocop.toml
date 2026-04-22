@@ -1,0 +1,9 @@
+[tool.robocop.lint]
+
+# Ignores documentation related rules https://robocop.dev/stable/rules_list/
+ignore = [
+    "missing-doc-keyword",
+    "missing-doc-test-case",
+    "missing-doc-suite",
+    "missing-doc-resource-file"
+]

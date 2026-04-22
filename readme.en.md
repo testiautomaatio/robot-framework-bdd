@@ -47,11 +47,11 @@ BDD tests use the **Given-When-Then** structure to describe the situation, actio
 ```robot
 *** Test Cases ***
 
-Successful login with a valid user
-    Given the user is on the login page
-    When the user enters valid credentials
-    And the user clicks the login button
-    Then the user should be redirected to the products page
+Successful Login With A Valid User
+    Given The User Is On The Login Page
+    When The User Enters Valid Credentials
+    And The User Clicks The Login Button
+    Then The User Should Be Redirected To The Products Page
 ```
 
 The test case above describes behavior in natural language without technical details such as element names or CSS selectors, making it easy to read and understand.
@@ -67,17 +67,17 @@ Library          Browser
 
 *** Keywords ***
 
-The user is on the login page
+The uSer Is On The Login Page
     New Page     https://www.saucedemo.com/
 
-The user enters valid credentials
+The User Enters Valid Credentials
     Fill Text    id=user-name         standard_user
     Fill Text    id=password          secret_sauce
 
-The user clicks the login button
+The User Clicks The Login Button
     Click        text=Login
 
-The user should be redirected to the products page
+The User Should Be Redirected To The Products Page
     Get Url      should end with      inventory.html
 ```
 
@@ -142,11 +142,11 @@ For product listing and purchasing flows you should use the `standard_user` acco
 **As a** registered user, **I want to** log in with valid credentials, **So that** I can access the products page and shop.
 
 ```robot
-Successful login with a valid user
-    Given the user is on the login page
-    When the user enters valid credentials
-    And the user clicks the login button
-    Then the user should be redirected to the products page
+Successful Login With A Valid User
+    Given The User Is On The Login Page
+    When The User Enters Valid Credentials
+    And The User Clicks The Login Button
+    Then The User Should Be Redirected To The Products Page
 ```
 
 **Scenario: Login with an invalid user**
@@ -154,11 +154,11 @@ Successful login with a valid user
 **As a** user who enters incorrect credentials, **I want to** see an error message, **So that** I understand that my login attempt failed.
 
 ```robot
-Login with an invalid user
-    Given the user is on the login page
-    When the user enters an invalid username or password
-    And the user clicks the login button
-    Then an error message should be displayed
+Login With An Invalid User
+    Given The User Is On The Login Page
+    When The User Enters An Invalid Username Or Password
+    And The User Clicks The Login Button
+    Then An Error Message Should Be Displayed
 ```
 
 **Scenario: Login with a locked-out user**
@@ -166,11 +166,11 @@ Login with an invalid user
 **As a** locked-out user, **I want to** be informed that my account is locked, **So that** I know I cannot proceed and need assistance.
 
 ```robot
-Login with a locked-out user
-    Given the user is on the login page
-    When the user enters credentials for a locked-out user
-    And the user clicks the login button
-    Then an error message should indicate that the user is locked out
+Login With A Locked-Out User
+    Given The User Is On The Login Page
+    When The User Enters Credentials For A Locked-Out User
+    And The User Clicks The Login Button
+    Then An Error Message Should Indicate That The User Is Locked Out
 ```
 
 
@@ -181,10 +181,10 @@ Login with a locked-out user
 **As a** logged-in user, **I want to** see a list of available products, **So that** I can browse and choose what to buy.
 
 ```robot
-Product list is displayed after login
-    Given the user is logged in
-    When the user navigates to the products page
-    Then a list of products should be visible
+Product List Is Displayed After Login
+    Given The User Is Logged In
+    When The User Navigates To The Products Page
+    Then A List Of Products Should Be Visible
 ```
 
 **Scenario: Sorting products by price**
@@ -192,10 +192,10 @@ Product list is displayed after login
 **As a** user on the products page, **I want to** sort items by price (low to high), **So that** I can easily find the most affordable products first.
 
 ```robot
-Sorting products by price
-    Given the user is on the products page
-    When the user selects "price low to high" from the sorting dropdown
-    Then the products should be listed in ascending order of price
+Sorting Products By Price
+    Given The User Is On The Products Page
+    When The User Selects "Price Low To High" From The Sorting Dropdown
+    Then The Products Should Be Listed In Ascending Order Of Price
 ```
 
 > [!TIP]
@@ -208,10 +208,10 @@ Sorting products by price
 **As a** user browsing products, **I want to** add a product to my cart, **So that** I can purchase it later.
 
 ```robot
-Adding an item to the cart
-    Given the user is on the products page
-    When the user adds a product to the cart
-    Then the product should be added to the cart
+Adding An Item To The Cart
+    Given The User Is On The Products Page
+    When The User Adds A Product To The Cart
+    Then The Product Should Be Added To The Cart
 ```
 
 **Scenario: Seeing the correct number of items in the cart**
@@ -219,10 +219,10 @@ Adding an item to the cart
 **As a** user who has added products to the cart, **I want to** see the correct number of items displayed in the cart **So that** I can verify my selections before proceeding to checkout.
 
 ```robot
-Seeing the correct number of items in the cart
-    Given the user is on the products page
-    When the user adds multiple products to the cart
-    Then the cart icon should show the correct item count
+Seeing The Correct Number Of Items In The Cart
+    Given The User Is On The Products Page
+    When The User Adds Multiple Products To The Cart
+    Then The Cart Icon Should Show The Correct Item Count
 ```
 
 **Scenario: Removing an item from the cart**
@@ -230,10 +230,10 @@ Seeing the correct number of items in the cart
 **As a** user with an item in my cart, **I want to** remove an item from the cart, **So that** I can adjust my order before checkout.
 
 ```robot
-Removing an item from the cart
-    Given the user has an item in the cart
-    When the user removes the item from the cart
-    Then the cart should be empty
+Removing An Item From The Cart
+    Given The User Has An Item In The Cart
+    When The User Removes The Item From The Cart
+    Then The Cart Should Be Empty
 ```
 
 **Scenario: Proceeding to checkout**
@@ -241,10 +241,10 @@ Removing an item from the cart
 **As a** user with items in my cart, **I want to** proceed to checkout, **So that** I can complete my purchase.
 
 ```robot
-Proceeding to checkout
-    Given the user has items in the cart
-    When the user clicks the checkout button
-    Then the checkout page should be displayed
+Proceeding To Checkout
+    Given The User Has Items In The Cart
+    When The User Clicks The Checkout Button
+    Then The Checkout Page Should Be Displayed
 ```
 
 
@@ -255,11 +255,11 @@ Proceeding to checkout
 **As a** customer at checkout, **I want to** enter my payment and shipping details, **So that** I can finalize my order and receive my products.
 
 ```robot
-Completing a purchase
-    Given the user is on the checkout page
-    When the user enters valid checkout information
-    And the user completes the purchase
-    Then a confirmation message should be displayed
+Completing A Purchase
+    Given The User Is On The Checkout Page
+    When The User Enters Valid Checkout Information
+    And The User Completes The Purchase
+    Then A Confirmation Message Should Be Displayed
 ```
 
 
