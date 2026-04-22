@@ -21,9 +21,10 @@ BDD:ssä testitapaukset kirjoitetaan luonnollisella kielellä ja ne kuvaavat ohj
 
 ## Asennukset
 
-Robot Framework on Python-pohjainen testiautomaatiokehys, joten sen käyttäminen edellyttää Pythonin ja pip-paketinhallintajärjestelmän asennusta. Robot Frameworkin lisäksi tarvitset Browser-kirjaston, joka mahdollistaa web-selainten ohjaamisen testeissäsi. Browser-kirjasto käyttää taustalla Playwright-työkalua, joka on toteutettu Node.js:llä, joten tarvitset myös Node.js:n asennettuna.
+Robot Framework on Python-pohjainen testiautomaatiokehys, joten sen käyttäminen edellyttää Pythonin ja pip-paketinhallintajärjestelmän asennusta. Robot Frameworkin lisäksi tarvitset Browser-kirjaston, joka mahdollistaa web-selainten ohjaamisen testeissäsi. Browser-kirjasto käyttää taustalla Playwright-työkalua, joka on toteutettu Node.js:llä, joten tarvitset myös Node.js:n asennettuna. Tarkemmat asennusohjeet löytyvät erillisestä [installations.md](./installations.md)-tiedostosta.
 
-Tarkemmat asennusohjeet sekä tietoa valmiista devcontainers-ratkaisusta löytyvät [erillisestä installations.md](./installations.md)-tiedostosta.
+> [!TIP]
+> Tämä repositorio sisältää development container -määritykset, joiden avulla voit luoda käyttövalmiin, eristetyn kehitysympäristön joko pilvessä tai paikallisesti. Development containerin käyttö on ohjeistettu erillisessä [development container -osiossa](./devcontainer.md). Suosittelemme vahvasti kehityskonttien käyttöä yksinkertaisuuden, toistettavuuden ja tietoturvan vuoksi.
 
 
 ## Testien suorittaminen
@@ -199,7 +200,8 @@ Sorting products by price
     Then the products should be listed in ascending order of price
 ```
 
-💡 **Huom:** Voit olettaa, että tuotteet ja niiden hinnat eivät muutu. Sinun ei tarvitse vertailla hintoja testikoodissasi. Riittää että varmistat, että tietyt tuotteet ovat odotetuissa paikoissa lajittelun jälkeen.
+> [!TIP]
+> Voit olettaa, että tuotteet ja niiden hinnat eivät muutu. Sinun ei tarvitse vertailla hintoja testikoodissasi. Riittää että varmistat, että tietyt tuotteet ovat odotetuissa paikoissa lajittelun jälkeen.
 
 
 ### Ostoskori
@@ -277,7 +279,11 @@ Arvioinnin tulos löytyy hetken kuluttua actions-välilehdeltä. Mikäli et saa 
 
 Robot Framework on lisensoitu [Apache 2.0 -lisenssillä](https://github.com/robotframework/robotframework/blob/master/LICENSE.txt).
 
-Browser-kirjasto on lisensoitu [Apache 2.0 -lisenssillä](https://github.com/MarketSquare/robotframework-browser/blob/main/LICENSE).
+The Browser library on lisensoitu [Apache 2.0 -lisenssillä](https://github.com/MarketSquare/robotframework-browser/blob/main/LICENSE).
+
+The RobotCode extension on lisensoitu [Apache 2.0 -lisenssillä](https://marketplace.visualstudio.com/items?itemName=d-biehl.robotcode#license).
+
+The Robocop tool on lisensoitu [Apache 2.0 -lisenssillä](https://github.com/MarketSquare/robotframework-robocop/blob/main/LICENSE).
 
 
 ## Materiaalista

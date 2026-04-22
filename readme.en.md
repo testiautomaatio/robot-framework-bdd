@@ -19,9 +19,10 @@ In BDD, test cases are written in natural language and describe the system behav
 
 ## Installations
 
-Robot Framework is a Python-based test automation framework, so using it requires [Python and pip](https://www.python.org/downloads/) to be installed. In addition to Robot Framework, you need the Browser library, which enables controlling web browsers in your tests. The Browser library uses Playwright under the hood, and Playwright is implemented with Node.js, so Node.js must also be installed.
+Robot Framework is a Python-based test automation framework, so using it requires [Python and pip](https://www.python.org/downloads/) to be installed. In addition to Robot Framework, you need the Browser library, which enables controlling web browsers in your tests. The Browser library uses Playwright under the hood, and Playwright is implemented with Node.js, so Node.js must also be installed. All installation steps are covered in the [installations.md](./installations.md) file.
 
-Detailed installation instructions and information about the ready-made devcontainer solution can be found in the separate [installations.md](./installations.md) file.
+> [!TIP]
+> This repository also includes a development container configuration as described in the [development container section](./devcontainer.md). With the container, you can avoid installation issues and have a ready-to-use isolated environment either in the cloud or locally. We highly encourage using development containers for simplicity, reproducibility and security reasons.
 
 
 ## Running tests
@@ -197,7 +198,8 @@ Sorting products by price
     Then the products should be listed in ascending order of price
 ```
 
-💡 **Note:** You can assume that the products and their prices do not change. You do not need to compare numbers in your test code, just verify that specific items are in expected positions after sorting.
+> [!TIP]
+> You can assume that the products and their prices do not change. You do not need to compare numbers in your test code, just verify that specific items are in expected positions after sorting.
 
 ### Cart
 
@@ -272,9 +274,13 @@ You will find the assessment result shortly on the Actions tab. If you do not re
 
 The [Sauce Labs Sample Application](https://www.saucedemo.com/) is released under the [MIT license](https://github.com/saucelabs/sample-app-web/blob/main/LICENSE).
 
-Robot Framework is licensed under [Apache 2.0](https://github.com/robotframework/robotframework/blob/master/LICENSE.txt).
+Robot Framework is licensed under the [Apache 2.0 license](https://github.com/robotframework/robotframework/blob/master/LICENSE.txt).
 
-The Browser library is licensed under [Apache 2.0](https://github.com/MarketSquare/robotframework-browser/blob/main/LICENSE).
+The Browser library is licensed under the [Apache 2.0 license](https://github.com/MarketSquare/robotframework-browser/blob/main/LICENSE).
+
+The RobotCode extension is licensed under the [Apache 2.0 license](https://marketplace.visualstudio.com/items?itemName=d-biehl.robotcode#license).
+
+The Robocop tool is licensed under the [Apache 2.0 license](https://github.com/MarketSquare/robotframework-robocop/blob/main/LICENSE).
 
 
 ## About the material
