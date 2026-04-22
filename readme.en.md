@@ -158,7 +158,7 @@ Login with an invalid user
     Given the user is on the login page
     When the user enters an invalid username or password
     And the user clicks the login button
-    Then an error message should be displayed
+    Then An Authentication Error Should Be Displayed
 ```
 
 **Scenario: Login with a locked-out user**
@@ -211,7 +211,7 @@ Sorting products by price
 Adding an item to the cart
     Given the user is on the products page
     When the user adds a product to the cart
-    Then the product should be added to the cart
+    Then The Cart Should Contain One Item
 ```
 
 **Scenario: Seeing the correct number of items in the cart**

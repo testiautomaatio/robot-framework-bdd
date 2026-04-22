@@ -1,70 +1,31 @@
 *** Settings ***
 Library             Browser
-Resource            ./keywords/utils.robot
+Resource            ./utils.resource
+Resource            ./pages/cart_page.resource
 
-Test Setup          Setup test environment (logged in)
+Test Setup          Setup Test Environment (Logged In)
 Test Teardown       Close Context
 
 
 *** Test Cases ***
-Adding an item to the cart
-    Given the user is on the products page
-    When the user adds a product to the cart
-    Then the product should be added to the cart
+Adding An Item To The Cart
+    Given The User Is On The Products Page
+    When The User Adds A Product To The Cart
+    Then The Cart Should Contain One Item
 
-Seeing the correct number of items in the cart
-    Given the user is on the products page
-    When the user adds multiple products to the cart
-    Then the cart icon should show the correct item count
+Seeing The Correct Number Of Items In The Cart
+    Given The User Is On The Products Page
+    When The User Adds Multiple Products To The Cart
+    Then The Cart Icon Should Show The Correct Item Count
 
-Removing an item from the cart
-    Given the user is on the products page
-    And the user has an item in the cart
-    When the user removes the item from the cart
-    Then the cart should be empty
+Removing An Item From The Cart
+    Given The User Is On The Products Page
+    And The User Has An Item In The Cart
+    When The User Removes The Item From The Cart
+    Then The Cart Should Be Empty
 
-Proceeding to checkout
-    Given the user is on the products page
-    And the user has items in the cart
-    When the user clicks the checkout button
-    Then the checkout page should be displayed
-
-
-*** Keywords ***
-The user is on the products page
-    Go To       https://www.saucedemo.com/inventory.html
-
-The user adds a product to the cart
-    Click       id=add-to-cart-sauce-labs-backpack
-
-The product should be added to the cart
-    Get Text    id=remove-sauce-labs-backpack    contains    Remove
-    Get Text    .shopping_cart_badge    ==    1
-
-The user adds multiple products to the cart
-    Click       id=add-to-cart-sauce-labs-backpack
-    Click       id=add-to-cart-sauce-labs-bike-light
-    Click       id=add-to-cart-sauce-labs-bolt-t-shirt
-
-The cart icon should show the correct item count
-    Get Text    .shopping_cart_badge    ==    3
-
-The user has an item in the cart
-    The user adds a product to the cart
-    Get Text    .shopping_cart_badge    ==    1
-
-The user removes the item from the cart
-    Click       id=remove-sauce-labs-backpack
-
-The cart should be empty
-    Get Text    .shopping_cart_link    ==    ${EMPTY}
-
-The user has items in the cart
-    the user adds multiple products to the cart
-
-The user clicks the checkout button
-    Click       a.shopping_cart_link
-    Click       button >> "Checkout"
-
-The checkout page should be displayed
-    Get Url     should end with    /checkout-step-one.html
+Proceeding To Checkout
+    Given The User Is On The Products Page
+    And The User Has Items In The Cart
+    When The User Clicks The Checkout Button
+    Then The Checkout Page Should Be Displayed

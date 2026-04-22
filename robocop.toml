@@ -1,0 +1,7 @@
+[tool.robocop.lint]
+ignore = [
+    "missing-doc-keyword",
+    "missing-doc-test-case",
+    "missing-doc-suite",
+    "missing-doc-resource-file"
+]
