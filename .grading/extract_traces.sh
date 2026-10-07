@@ -21,11 +21,6 @@ if [ -z "$TRACE_FILES" ]; then
     exit 1  # Error
 fi
 
-echo "Traces found in the following folders:"
-echo
-echo "$TRACE_FILES" | xargs -n1 dirname | sort -u
-echo
-echo
-echo "These files contain all the browser states and events that were recorded during"
-echo "the tests. They will be used to verify that the tests covered the expected"
-echo "scenarios and that the application behaved as intended."
+echo "These extracted files contain all the browser states and events that were"
+echo "recorded during the tests. They will be used to verify that the tests"
+echo "covered the expected scenarios and that the application behaved as intended."

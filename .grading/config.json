@@ -28,7 +28,7 @@
             "score": 10
         },
         {
-            "name": "Login with an incorrect credentials",
+            "name": "Login with incorrect credentials",
             "description": "Verifies that your tests included a login attempt with incorrect credentials.",
             "run": "./.grading/find_trace.sh 'Username and password do not match any user in this service'",
             "timeout": "15s",
