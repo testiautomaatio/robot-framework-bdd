@@ -1,0 +1,9 @@
+{
+    "github.copilot.completions.chat.enabled": false,
+    "github.copilot.nextEditSuggestions.enabled": false,
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "robotframework": false
+    }
+}
