@@ -23,12 +23,12 @@
         {
             "name": "Successful login with a valid user",
             "description": "Verifies that a successful login was completed in your tests.",
-            "run": "./.grading/find_trace.sh inventory.html",
+            "run": "./.grading/find_trace.sh '/inventory.html'",
             "timeout": "15s",
             "score": 10
         },
         {
-            "name": "Login with an incorrect credentials",
+            "name": "Login with incorrect credentials",
             "description": "Verifies that your tests included a login attempt with incorrect credentials.",
             "run": "./.grading/find_trace.sh 'Username and password do not match any user in this service'",
             "timeout": "15s",
@@ -44,7 +44,7 @@
         {
             "name": "Product list is displayed after login",
             "description": "Verifies that the tests opened the product list page.",
-            "run": "./.grading/find_trace.sh 'Products'",
+            "run": "./.grading/find_trace.sh '/inventory.html'",
             "timeout": "15s",
             "score": 10
         },
