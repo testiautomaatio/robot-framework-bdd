@@ -1,0 +1,94 @@
+{
+    "name": "Testing the Sauce Demo Web Application with Robot Framework",
+    "description": "This test suite verifies that the tests are run correctly and that they cover the required functionality.",
+    "tests": [
+        {
+            "name": "Run tests and extract traces",
+            "description": "Run the Robot Framework tests and extract traces for further analysis. Passing this step does not guarantee that your tests covered the required functionality, which is checked by the subsequent tests.",
+            "run": [
+                "robot --outputdir=test-results/ tests/",
+                "./.grading/extract_traces.sh"
+            ],
+            "timeout": "4m",
+            "score": 0,
+            "skipRemainingOnFailure": true
+        },
+        {
+            "name": "Code quality check",
+            "description": "Checks the code quality of the Robot Framework tests using the [Robocop linter](https://github.com/MarketSquare/robotframework-robocop). This step does not affect your score, but it can help you identify potential issues in your tests.",
+            "run": "robocop check",
+            "timeout": "1m",
+            "score": 0
+        },
+        {
+            "name": "Successful login with a valid user",
+            "description": "Verifies that a successful login was completed in your tests.",
+            "run": "./.grading/find_trace.sh inventory.html",
+            "timeout": "15s",
+            "score": 10
+        },
+        {
+            "name": "Login with an incorrect credentials",
+            "description": "Verifies that your tests included a login attempt with incorrect credentials.",
+            "run": "./.grading/find_trace.sh 'Username and password do not match any user in this service'",
+            "timeout": "15s",
+            "score": 10
+        },
+        {
+            "name": "Login with a locked-out user",
+            "description": "Verifies that your tests included a login attempt with a locked-out user.",
+            "run": "./.grading/find_trace.sh 'Sorry, this user has been locked out'",
+            "timeout": "15s",
+            "score": 10
+        },
+        {
+            "name": "Product list is displayed after login",
+            "description": "Verifies that the tests opened the product list page.",
+            "run": "./.grading/find_trace.sh 'Products'",
+            "timeout": "15s",
+            "score": 10
+        },
+        {
+            "name": "Sorting products by price (low to high)",
+            "description": "Verifies that the sorting feature was used in your tests.",
+            "run": "./.grading/find_trace.sh 'selected specified option'",
+            "timeout": "15s",
+            "score": 10
+        },
+        {
+            "name": "Adding an item to the cart",
+            "description": "Verifies that your tests included adding items to the shopping cart.",
+            "run": "./.grading/find_trace.sh shopping_cart_badge",
+            "timeout": "15s",
+            "score": 10
+        },
+        {
+            "name": "Seeing the correct number of items in the cart",
+            "description": "Verifies that the tests showed the correct number of items in the shopping cart.",
+            "run": "./.grading/find_trace.sh shopping_cart_badge",
+            "timeout": "15s",
+            "score": 10
+        },
+        {
+            "name": "Removing an item from the cart",
+            "description": "Verifies that your tests included removing items from the shopping cart.",
+            "run": "./.grading/find_trace.sh 'Remove'",
+            "timeout": "15s",
+            "score": 10
+        },
+        {
+            "name": "Proceeding to checkout",
+            "description": "Verifies that your tests included the checkout process.",
+            "run": "./.grading/find_trace.sh 'checkout-step-one.html'",
+            "timeout": "15s",
+            "score": 10
+        },
+        {
+            "name": "Completing a purchase",
+            "description": "Verifies that your tests included completing a purchase.",
+            "run": "./.grading/find_trace.sh 'checkout-complete.html'",
+            "timeout": "15s",
+            "score": 10
+        }
+    ]
+}
