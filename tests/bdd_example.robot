@@ -6,11 +6,11 @@ https://marketsquare.github.io/robotframework-browser/Browser.html
 
 *** Settings ***
 # Importing the Browser library adds the New Page, Click, Fill Text, and Get Url keywords:
-Library             Browser
+Library          Browser
 
 # The following lines are required for automatic assessment of the exercise:
-Test Setup          New Context    tracing=True
-Test Teardown       Close Context
+Test Setup       New Context    tracing=True
+Test Teardown    Close Context
 
 
 *** Test Cases ***
@@ -30,16 +30,18 @@ The User Is On The Login Page
 The User Enters Valid Credentials
     # Fill Text is used to enter text into input fields. It takes a selector and the text to enter:
     # https://marketsquare.github.io/robotframework-browser/Browser.html#Fill%20Text
-    Fill Text    id=user-name    standard_user
-    Fill Text    id=password    secret_sauce
+
+    Log    Use the "Fill Text" keyword to enter the username and password into the appropriate input fields.
 
 The User Clicks The Login Button
     # Click locates the given element and simulates a mouse click on it:
     # https://marketsquare.github.io/robotframework-browser/Browser.html#Click
-    Click    text=Login
+
+    Log    Use the "Click" keyword to click the login button.
 
 The User Should Be Redirected To The Products Page
     # At the end of each test case, it is important to verify that the expected outcome
     # has been achieved. This can be done using assertions provided by the Browser library:
     # https://marketsquare.github.io/robotframework-browser/Browser.html#Assertions
-    Get Url    should end with    inventory.html
+
+    Log    Use the "Get Url" keyword to retrieve the current URL and assert that it ends with "inventory.html".
