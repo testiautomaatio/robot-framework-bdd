@@ -1,3 +1,8 @@
+# This file lists the Python packages that are required to run the Robot Framework tests.
+#
+# Install the packages using pip:
+# pip install -r requirements.txt
+
 # https://github.com/robotframework/robotframework
 robotframework
 
