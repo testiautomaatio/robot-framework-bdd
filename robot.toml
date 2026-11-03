@@ -1,3 +1,6 @@
+paths = ["tests"]
+output-dir = "test-results"
+
 [tool.robocop.lint]
 
 # Ignores documentation related rules https://robocop.dev/stable/rules_list/

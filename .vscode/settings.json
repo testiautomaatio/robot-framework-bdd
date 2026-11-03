@@ -5,5 +5,7 @@
         "*": false,
         "plaintext": false,
         "robotframework": false
-    }
+    },
+    "files.insertFinalNewline": true,
+    "editor.formatOnSave": true
 }
