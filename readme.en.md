@@ -89,7 +89,7 @@ Keyword names are case-insensitive and can be prefixed with words such as `given
 
 Robot Framework, like Python, uses indentation to separate code blocks. Each operation consists of parts (keyword and arguments) separated by multiple spaces. For example, `Fill Text  id=user-name  standard_user` has three parts: the keyword (`Fill Text`), the selector (`id=user-name`), and the text (`standard_user`). They must be separated by *two or more spaces* so Robot Framework recognizes them as distinct.
 
-In the example above, the keywords `New Page`, `Fill Text`, `Click`, and `Get Url` are [Browser library keywords](https://marketsquare.github.io/robotframework-browser/Browser.html) used to control the browser and inspect page state. All Browser keywords are documented at https://marketsquare.github.io/robotframework-browser/Browser.html.
+In the example above, the keywords [New Page](https://robotframework-browser.org/keywords#new-page), [Fill Text](https://robotframework-browser.org/keywords#fill-text), [Click](https://robotframework-browser.org/keywords#click), and [Get Url](https://robotframework-browser.org/keywords#get-url) are Browser library keywords used to control the browser and inspect page state.
 
 You can find this full BDD example in [`tests/bdd_example.robot`](./tests/bdd_example.robot). Run it with:
 
@@ -115,7 +115,7 @@ These reusable keywords can live in their own file and be imported into other te
 
 For **automatic assessment** your test cases must save browser activity into a "trace" file so the grader can verify that required steps were executed.
 
-To save trace files correctly, each test case must start with `New Context    tracing=True`. This opens a new isolated browser context so tests can run in parallel without interfering with each other. Read more in the [Browser library docs](https://marketsquare.github.io/robotframework-browser/Browser.html#Browser%2C%20Context%20and%20Page).
+To save trace files correctly, each test case must start with `New Context    tracing=True`. This opens a new isolated browser context so tests can run in parallel without interfering with each other. Read more about [browsers, contexts, and pages](https://robotframework-browser.org/docs/concepts/browser-context-page).
 
 The simplest way is to add these lines to the `*** Settings ***` section at the top of every robot file to open a context before each test and close it afterward:
 

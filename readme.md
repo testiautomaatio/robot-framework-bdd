@@ -91,7 +91,7 @@ Avainsanoissa kirjainkoolla ei ole merkitystä ja niiden alkuun voidaan lisätä
 
 Robot Framework noudattaa Pythonin tavoin sisennyksiä koodilohkojen erottamiseksi. Yksittäiset operaatiot koostuvat eri osista, kuten avainsanasta ja sen argumenteista, jotka erotetaan toisistaan käyttämällä useita välilyöntejä. Esimerkiksi rivi `Fill Text  id=user-name  standard_user` koostuu kolmesta osasta: avainsanasta (`Fill Text`), selektorista (`id=user-name`) ja tekstistä (`standard_user`). Nämä täytyy erottaa toisistaan *kahdella tai useammalla välilyönnillä*, jotta Robot Framework ymmärtää, että kyseessä on kolme erillistä osaa.
 
-Yllä olevassa esimerkissä avainsanat `New Page`, `Fill Text`, `Click` ja `Get Url` ovat siis [Browser-kirjaston avainsanoja](https://marketsquare.github.io/robotframework-browser/Browser.html), joiden avulla voidaan ohjata web-selainta ja tarkastaa sivuston tilaa. Kaikki Browser-kirjaston avainsanat on dokumentoitu sen omilla sivuilla: https://marketsquare.github.io/robotframework-browser/Browser.html.
+Yllä olevassa esimerkissä avainsanat [New Page](https://robotframework-browser.org/keywords#new-page), [Fill Text](https://robotframework-browser.org/keywords#fill-text), [Click](https://robotframework-browser.org/keywords#click) ja [Get Url](https://robotframework-browser.org/keywords#get-url) ovat Browser-kirjaston avainsanoja, joiden avulla voidaan ohjata web-selainta ja tarkastaa sivuston tilaa.
 
 Yllä oleva BDD-esimerkki löytyy kokonaisuudessaan tiedostosta [`tests/bdd_example.robot`](./tests/bdd_example.robot). Voit kokeilla suorittaa kyseisen testitiedoston komennolla:
 
@@ -117,7 +117,7 @@ Tällaiset uudelleenkäytettävät avainsanat voidaan määritellä omassa tiedo
 
 **Automaattisen arvioinnin** vuoksi testitapausten tulee tallentaa selaimen tapahtumat ns. "trace"-tiedostoon, jonka avulla tehtävän automaattinen arviointi varmistaa, että vaaditut tapaukset on käyty läpi.
 
-Jotta trace-tiedostot tallentuvat oikein, jokaisen testitapauksen alussa tulee olla komento `New Context    tracing=True`. Komento avaa uuden "kontekstin", joiden avulla eri testit ovat toisistaan eristyksissä ja joiden avulla testejä voidaan suorittaa samassa selaimessa rinnakkain niiden häiritsemättä toisiaan. Voit lukea aiheesta lisää [Browser-kirjaston dokumentaatiosta](https://marketsquare.github.io/robotframework-browser/Browser.html#Browser%2C%20Context%20and%20Page).
+Jotta trace-tiedostot tallentuvat oikein, jokaisen testitapauksen alussa tulee olla komento `New Context    tracing=True`. Komento avaa uuden "kontekstin", joiden avulla eri testit ovat toisistaan eristyksissä ja joiden avulla testejä voidaan suorittaa samassa selaimessa rinnakkain niiden häiritsemättä toisiaan. Voit lukea aiheesta lisää [Browser-, context- ja page-käsitteistä](https://robotframework-browser.org/docs/concepts/browser-context-page).
 
 Helpoiten saat uuden kontekstin luotua jokaisen testin alussa ja suljettua jokaisen testin lopussa lisäämällä seuraavat rivit jokaisen robot-tiedoston alkuun `*** Settings ***`-lohkoon:
 
