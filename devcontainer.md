@@ -2,15 +2,9 @@
 
 If you want to avoid installation issues and have a ready-to-use environment, you can use the provided [development container configuration](./.devcontainer/devcontainer.json). A [development container](https://code.visualstudio.com/docs/devcontainers/containers) is a [Docker container](https://www.docker.com/resources/what-container/) that has all the necessary tools and dependencies installed, allowing you to work in a consistent environment that is independent of your local setup.
 
-In this case, the development container is [configured](./.devcontainer/devcontainer.json) to have Node.js and the Playwright VS Code extension installed, along with typical command-line tools that are included in development containers.
+In this case, the development container is [configured](./.devcontainer/devcontainer.json) with Python, Node.js, and the RobotCode VS Code extension, along with typical command-line tools. The repository uses Robot Framework with its Browser library; the Browser library uses Playwright behind the scenes.
 
-> [!NOTE]
-> Note that if you choose to use the development container, you will need to install test browsers with a `--with-deps` flag. This is because the development container is minimal and does not include all system dependencies required by browsers, for example. In this exercise browsers are installed with the following command:
->
-> ```bash
-> # Container does not include all browser dependencies, so we install them too:
-> rfbrowser init chromium --with-deps
-> ```
+The container setup installs the Python dependencies from [`requirements.txt`](./requirements.txt) and initializes Chromium for the Browser library with `rfbrowser init chromium --with-deps`. This also installs the system dependencies required by the browser.
 
 
 ## Run a container locally
@@ -45,34 +39,13 @@ For information about how to [stop](https://docs.github.com/en/codespaces/develo
 
 ## Tips, troubleshooting, and resources
 
-### Installing browser dependencies
+### Opening Robot Framework reports
 
-Inside a development container, Playwright browsers need to be installed with a `--with-deps` flag. This is because the development container is minimal and does not include all system dependencies required by browsers, for example fonts.
-
-> [!NOTE]
-> ```bash
-> npx playwright install chromium --with-deps
-> ```
-
-
-### Opening the test report
-
-Opening the Playwright HTML report from your own browser might not work when the report is served from the development container. This happens because Playwright will only allow the local machine to access the report for security reasons. When the report is opened inside the container, your own operating system is technically a separate host, so it should not be able to connect.
-
-You can work around this by opening the report and setting the `--host` flag to listen to all interfaces, not just the local one. For example, you can run the following command in the terminal of the development container:
-
-> [!NOTE]
-> ```bash
-> npx playwright show-report --host 0.0.0.0
-> ```
->
-> **⚠️ Security note**
->
-> Binding to `0.0.0.0` exposes the report server to your network. Avoid doing this on untrusted networks unless you firewall it.
+Robot Framework creates `report.html` and `log.html` when tests are run. In this repository, test output is written to the `test-results` directory; for example, run `robot --outputdir=test-results tests/example.robot` and open `test-results/report.html` or `test-results/log.html` in VS Code.
 
 
 ### Graphical applications
 
-Opening graphical applications that are running inside the development container, such as the browser running the tests, might not work the same way as on your local machine. This is because the development container is a separate environment that does not have direct access to your local display server.
+Opening graphical applications that are running inside the development container, such as a browser launched by a test, might not work the same way as on your local machine. This is because the development container is a separate environment that does not have direct access to your local display server.
 
 We have included the [Desktop Lite feature](https://github.com/devcontainers/features/tree/main/src/desktop-lite) in the development container to provide a way to run graphical applications in a web-based desktop environment. You can access this environment by opening a browser and navigating to `http://localhost:6080`. This will give you a web-based desktop where you can use graphical applications that are installed in the development container.
