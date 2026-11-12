@@ -3,13 +3,17 @@
     "description": "This test suite verifies that the tests are run correctly and that they cover the required functionality.",
     "tests": [
         {
-            "name": "Run tests and extract traces",
-            "description": "Run the Robot Framework tests and extract traces for further analysis. Passing this step does not guarantee that your tests covered the required functionality, which is checked by the subsequent tests.",
-            "run": [
-                "robot --outputdir=test-results/ tests/",
-                "./.grading/extract_traces.sh"
-            ],
+            "name": "Run tests",
+            "description": "Run the Robot Framework tests. Passing this step does not guarantee that your tests covered the required functionality, which is checked by the subsequent tests.",
+            "run": "robot --outputdir=test-results/ tests/",
             "timeout": "4m",
+            "score": 0
+        },
+        {
+            "name": "Extract traces",
+            "description": "Extract traces from the tests for further analysis. The traces will be inspected to verify that the tests covered each scenario.",
+            "run": "./.grading/extract_traces.sh",
+            "timeout": "1m",
             "score": 0,
             "skipRemainingOnFailure": true
         },
